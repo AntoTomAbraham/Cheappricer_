@@ -4,6 +4,10 @@ const bodyParser=require("body-parser")
 
 app.use(bodyParser.json())
 
+app.get("/",(req,res)=>{
+    return res.json("haiii")
+})
+
 const adminRoutes=require('./routes/admin')
 app.use('/admin',adminRoutes)
 
