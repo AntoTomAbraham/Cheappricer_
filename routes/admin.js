@@ -11,6 +11,11 @@ router.post('/signin',(req,res)=>{
     }
 })
 
+router.post('/create',(req,res)=>{
+    const {productId,productLink,category,subCategory,brand,imageLink,description}=req.body;
+
+})
+
 
 
 
