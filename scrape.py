@@ -5,6 +5,9 @@ import requests,datetime,json,time
 
 def amazon_india(url):
     pass
+    #price_scrapping
+
+    #rating_scrapping
 
 
 def flikart(url):
