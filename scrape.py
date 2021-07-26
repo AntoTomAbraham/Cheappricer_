@@ -9,6 +9,7 @@ headers = {
     'DNT' : '1', # Do Not Track Request Header 
     'Connection' : 'close'
 }
+headers1={'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36'}
 
 def get_date():
     dateval=str(datetime.date.today()) #date
@@ -21,16 +22,20 @@ def amazon_india(url):
     page=requests.get(url,headers=headers)
     soup=BeautifulSoup(page.content,"html.parser")
     price=soup.find(id="priceblock_dealprice").text
-    price=price[1:]
-    
+    return price[1:]
     
 
 def flikart(url):
-    pass
-
+    page=requests.get(url,headers=headers)
+    soup=BeautifulSoup(page.content,"html.parser")
+    price=soup.find(class_="_30jeq3 _16Jk6d").text
+    return price[1:]
 
 def croma(url):
-    pass
+    page=requests.get(url,headers=headers1)
+    #soup=BeautifulSoup(page.content,"html.parser")
+    #price=soup.find("div",class_="cp-price main-product-price")
+    print(page.content)
 
 
 def rel_digital(url):
@@ -40,4 +45,4 @@ def tata_clk(url):
     pass
 
 
-amazon_india("https://www.amazon.in/Test-Exclusive_2020_1157-Multi-3GB-Storage/dp/B089MV3Q2G/?_encoding=UTF8&smid=A1K6XQ7KUWCZYH&pd_rd_w=DdpQm&pf_rd_p=7037cdee-6642-4363-bdd1-38a775cd69e9&pf_rd_r=QHPC5VQB8W20SGCBGK1E&pd_rd_r=1019d529-c37e-46c9-8727-0a0aca8d99b8&pd_rd_wg=kCrqa&ref_=pd_gw_unk")
+croma("https://www.croma.com/bose-sleepbuds-ii-in-ear-passive-noise-cancellation-truly-wireless-earbuds-bluetooth-5-0-user-tested-sleep-technology-white-/p/238781")
