@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import requests,datetime,json,time
+from requests_html import HTMLSession
 
 headers = { 
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', 
@@ -10,6 +11,7 @@ headers = {
     'Connection' : 'close'
 }
 headers1={'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36'}
+
 
 def get_date():
     dateval=str(datetime.date.today()) #date
@@ -31,18 +33,29 @@ def flikart(url):
     price=soup.find(class_="_30jeq3 _16Jk6d").text
     return price[1:]
 
+
 def croma(url):
-    page=requests.get(url,headers=headers1)
-    #soup=BeautifulSoup(page.content,"html.parser")
-    #price=soup.find("div",class_="cp-price main-product-price")
-    print(page.content)
+    session = HTMLSession()
+    resp = session.get(url)
+    resp.html.render()
+    data=resp.html
+    price=data.find(".amount")
+    return price[0].text
+    
+
 
 
 def rel_digital(url):
-    pass
+    page=requests.get(url,headers=headers)
+    soup=BeautifulSoup(page.content,"html.parser")
+    price=soup.find(class_="pdp__offerPrice").text
+    return price[1:]
 
-def tata_clk(url):
-    pass
+def dell_india_pc(url): #only for laptops & desktops
+    page=requests.get(url,headers=headers)
+    soup=BeautifulSoup(page.content,"html.parser")
+    price=soup.find(class_="cf-dell-price")
+    price=price.text
+    price=price.split("\n")
+    return price[2][14:]
 
-
-croma("https://www.croma.com/bose-sleepbuds-ii-in-ear-passive-noise-cancellation-truly-wireless-earbuds-bluetooth-5-0-user-tested-sleep-technology-white-/p/238781")
