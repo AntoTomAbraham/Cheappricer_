@@ -15,6 +15,35 @@ prd_id="1"
 
 #getting data & running scrapping funcs from product_data.json
 
+p_data=open("JSON_Data/product_data.json")
+p_data=json.load(p_data)
+for i in range(0,len(p_data)):
+    sites=p_data[prd_id].keys()
+    for site in sites:
+        if(site=="p_name"):
+            pass
+        else:
+            if(site=="amazon_in"):
+                link=p_data[prd_id][site]
+                print(link)
+            elif(site=="flipkart"):
+                link=p_data[prd_id][site]
+                print(link)
+            elif(site=="rel_digi"):
+                link=p_data[prd_id][site]
+                print(link)
+            elif(site=="croma"):
+                link=p_data[prd_id][site]
+                print(link)
+            else:
+                pass   
+
+    #incrementation
+    prd_id=int(prd_id)
+    prd_id=prd_id+1
+    prd_id=str(prd_id)
+
+
 
 
 

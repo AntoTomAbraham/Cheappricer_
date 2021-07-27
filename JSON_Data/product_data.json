@@ -5,6 +5,13 @@
         "flipkart":"flipkart_link",
         "rel_digi":"reliance_digi_link",
         "croma":"cr_link"
+    },
+    "2":{
+        "p_name":"sample_name",
+        "amazon_in":"amazon_link",
+        "flipkart":"flipkart_link",
+        "rel_digi":"reliance_digi_link",
+        "croma":"cr_link"
     }
 
 }
