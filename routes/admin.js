@@ -48,7 +48,7 @@ router.post('/create',async (req,res)=>{
    const dell=req.body.dell
 
    //const proId=req.body.proId
-   const proName=req.body.proUrl    //name changed
+   const proUrl=req.body.proUrl    //name changed
    const category=req.body.category
    const subCategory=req.body.subCategory
    const imgLink=req.body.imgLink
@@ -56,7 +56,7 @@ router.post('/create',async (req,res)=>{
    const desc=req.body.desc
 
 
-   const data={proId,proName,category,subCategory,imgLink,brand,desc}
+   const data={proId,proUrl,category,subCategory,imgLink,brand,desc}
 
    console.log(data)
 
@@ -69,21 +69,21 @@ router.post('/create',async (req,res)=>{
                     error:"Error saving"
                 })
             }else{
-                res.json(product)
-                console.log("Saved")
-                proId++;
-                let newId = {
-                    "id": proId
-                }  
-                var NewId=fs.readFileSync('JSON_Data/productId.json');
-                var myObject= JSON.parse(NewId);
-                myObject.push(newId);
-                var newData = JSON.stringify(myObject);
-                fs.writeFile('JSON_Data/productId.json', newData, err => {
-                    // error checking
-                    if(err) throw err;
-                    console.log("New data added");
-                });   
+                 res.json(product)
+                // console.log("Saved")
+                // proId++;
+                // let newId = {
+                //     "id": proId
+                // }  
+                // var NewId=fs.readFileSync('JSON_Data/productId.json');
+                // var myObject= JSON.parse(NewId);
+                // myObject.push(newId);
+                // var newData = JSON.stringify(myObject);
+                // fs.writeFile('JSON_Data/productId.json', newData, err => {
+                //     // error checking
+                //     if(err) throw err;
+                //     console.log("New data added");
+                // });   
             }
    
   
