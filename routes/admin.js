@@ -47,9 +47,7 @@ router.post('/create',(req,res)=>{
                     error:"Error saving"
                 })
             }else{
-
-                 res.json(product)
-                 
+                res.json(product)
                 res.json(product)
                 console.log("Saved")
             }
