@@ -19,22 +19,27 @@ router.post('/signin',(req,res)=>{
 
 
 
-router.post('/create',(req,res)=>{
+router.post('/create',async (req,res)=>{
     //retrieving id
     var proId;
 
-    fs.readFile("JSON_Data/productId.json",(err,data)=>{
+    // fs.readFile("JSON_Data/productId.json",(err,data)=>{
     
-        if (err) throw err;
-        const id = JSON.parse(data);
-        proId=id["id"];
-        //console.log(proId)
+    //     if (err) throw err;
+    //     const id = JSON.parse(data);
+    //     proId=id["id"];
+    //     //console.log(proId)
         
-    });
+    // });
     //waiting initiated for 50ms for getting data
-    setTimeout(()=>{
-        console.log(proId);
-    },50);
+    
+    let len;
+   await Product.find().count()
+   .then(number => {
+      len=number+1
+      console.log("lensisss"+len.toString())
+   });
+   proId=len+1
 
    const amazon=req.body.amazon
    const flipkart=req.body.flipkart
@@ -51,9 +56,10 @@ router.post('/create',(req,res)=>{
    const desc=req.body.desc
 
 
-   const data={proId,proUrl,category,subCategory,imgLink,brand,desc}
+   const data={proId,proName,category,subCategory,imgLink,brand,desc}
 
    console.log(data)
+
 
    let product= new Product(data)
    product.save((err,product)=>{
@@ -79,12 +85,13 @@ router.post('/create',(req,res)=>{
                     console.log("New data added");
                 });   
             }
-   })
-
+   
+  
+   
 })
 
 
-
+})
 
 module.exports=router;
 
