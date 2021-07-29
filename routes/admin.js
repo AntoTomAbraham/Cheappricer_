@@ -13,6 +13,7 @@ router.post('/signin',(req,res)=>{
 })
 
 router.post('/create',(req,res)=>{
+<<<<<<< HEAD
    
    const amazon=req.body.amazon
    const flipkart=req.body.flipkart
@@ -32,6 +33,13 @@ router.post('/create',(req,res)=>{
    console.log(data)
 
    let product= new Product(data)
+=======
+   const {proId,proUrl,category,subCategory,imgLink,brand,desc}=req.body;
+    
+    
+   console.log(req.body)
+   let product= new Product(req.body)
+>>>>>>> 507112f6fcf3e38b7b160391470d7b54e686f55b
    product.save((err,product)=>{
        if(err){
            console.log(err)
