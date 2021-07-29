@@ -33,10 +33,16 @@ router.post('/create',async (req,res)=>{
    const brand=req.body.brand
    const desc=req.body.desc
 
+<<<<<<< HEAD
     //splitting at space
    var proName=proUrl.split(" ");
    proUrl=proName.join("-");   //joining with - for routing purpo.
     
+=======
+    
+   
+
+>>>>>>> 44194067f19cab477714b5e53d8ea80c92f2ee33
    
    let len;
    await Product.find().count()
