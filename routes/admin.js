@@ -23,31 +23,53 @@ router.post('/create',async (req,res)=>{
    const amazon=req.body.amazon
    const flipkart=req.body.flipkart
    const croma=req.body.croma
-   const relaince=req.body.relaince
+   const relaince=req.body.reliance
    const dell=req.body.dell
 
-   //const proId=req.body.proId
-   const proUrl=req.body.proUrl    //name changed
+   var proUrl=req.body.proUrl
    const category=req.body.category
    const subCategory=req.body.subCategory
    const imgLink=req.body.imgLink
    const brand=req.body.brand
    const desc=req.body.desc
 
-
-   
-
+    //splitting at space
+   var proName=proUrl.split(" ");
+   proUrl=proName.join("-");   //joining with - for routing purpo.
+    
    
    let len;
    await Product.find().count()
    .then(length=>{
        len=length;
    })
-   proId=len+1;
+   proId=len+1;  //id from mongdodb
+   var arrId= String(proId);
+  
+   var file=fs.readFileSync('JSON_Data/product_data.json'); //reading JSON
+   var objData=JSON.parse(file); //PARSING
+    objData[arrId]={ //New data object
+        "p_name":proUrl,
+        "amazon_in":amazon,
+        "flipkart":flipkart,
+        "rel_digi":relaince,
+        "croma":croma,
+        "dell-pc":dell
+        
+    }
+    //writing into JSON
+    fs.writeFile('JSON_Data/product_data.json', JSON.stringify(objData,null,2), err => {
+        // error checking
+        if(err) throw err;
+        
+        console.log("New data added");
+    });  
 
+    //db
    const data={proId,proUrl,category,subCategory,imgLink,brand,desc}
    console.log(data)
    
+
    let product= new Product(data)
    product.save((err,product)=>{
        if(err){
