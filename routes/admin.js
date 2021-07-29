@@ -11,35 +11,13 @@ router.post('/signin',(req,res)=>{
     }else{
         return res.status(200).json({message:"signin failed"}) 
     }
+
 })
 
 
 
 
-
-
-
-router.post('/create',async (req,res)=>{
-    //retrieving id
-    var proId;
-
-    // fs.readFile("JSON_Data/productId.json",(err,data)=>{
-    
-    //     if (err) throw err;
-    //     const id = JSON.parse(data);
-    //     proId=id["id"];
-    //     //console.log(proId)
-        
-    // });
-    //waiting initiated for 50ms for getting data
-    
-    let len;
-   await Product.find().count()
-   .then(number => {
-      len=number+1
-      console.log("lensisss"+len.toString())
-   });
-   proId=len+1
+router.post('/create',(req,res)=>{
 
    const amazon=req.body.amazon
    const flipkart=req.body.flipkart
@@ -69,21 +47,11 @@ router.post('/create',async (req,res)=>{
                     error:"Error saving"
                 })
             }else{
+
                  res.json(product)
-                // console.log("Saved")
-                // proId++;
-                // let newId = {
-                //     "id": proId
-                // }  
-                // var NewId=fs.readFileSync('JSON_Data/productId.json');
-                // var myObject= JSON.parse(NewId);
-                // myObject.push(newId);
-                // var newData = JSON.stringify(myObject);
-                // fs.writeFile('JSON_Data/productId.json', newData, err => {
-                //     // error checking
-                //     if(err) throw err;
-                //     console.log("New data added");
-                // });   
+                 
+                res.json(product)
+                console.log("Saved")
             }
    
   
