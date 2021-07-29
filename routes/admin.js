@@ -14,7 +14,7 @@ router.post('/signin',(req,res)=>{
 
 router.post('/create',(req,res)=>{
    const {proId,proUrl,category,subCategory,imgLink,brand,desc}=req.body;
-
+    
     
    console.log(req.body)
    let product= new Product(req.body)
