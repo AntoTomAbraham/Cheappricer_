@@ -13,11 +13,25 @@ router.post('/signin',(req,res)=>{
 })
 
 router.post('/create',(req,res)=>{
-   const {proId,proUrl,category,subCategory,imgLink,brand,desc}=req.body;
+   
+   const amazon=req.body.amazon
+   const flipkart=req.body.flipkart
+   const croma=req.body.croma
+   const relaince=req.body.relaince
+   const dell=req.body.dell
 
+   const proId=req.body.proId
+   const proUrl=req.body.proUrl
+   const category=req.body.category
+   const subCategory=req.body.subCategory
+   const imgLink=req.body.imgLink
+   const brand=req.body.brand
+   const desc=req.body.desc
+   const data={proId,proUrl,category,subCategory,imgLink,brand,desc}
 
-   console.log(req.body)
-   let product= new Product(req.body)
+   console.log(data)
+
+   let product= new Product(data)
    product.save((err,product)=>{
        if(err){
            console.log(err)
