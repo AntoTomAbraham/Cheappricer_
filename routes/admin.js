@@ -1,5 +1,6 @@
 var express = require('express')
 var router = express.Router()
+const fs = require("fs");
 const Product=require('../model/product')
 
 router.post('/signin',(req,res)=>{
@@ -12,21 +13,32 @@ router.post('/signin',(req,res)=>{
     }
 })
 
+
 router.post('/create',(req,res)=>{
-   
+    let proId;
+    //retrieving id
+    fs.readFile("JSON_Data/productId.json",(err,data)=>{
+        if (err) throw err;
+        const id = JSON.parse(data);
+        proId=id["id"];
+        console.log(proId);
+    })
+    
    const amazon=req.body.amazon
    const flipkart=req.body.flipkart
    const croma=req.body.croma
    const relaince=req.body.relaince
    const dell=req.body.dell
-    
-   const proId=req.body.proId
-   const proUrl=req.body.proUrl
+
+   //const proId=req.body.proId
+   const proName=req.body.proUrl    //name changed
    const category=req.body.category
    const subCategory=req.body.subCategory
    const imgLink=req.body.imgLink
    const brand=req.body.brand
    const desc=req.body.desc
+
+
    const data={proId,proUrl,category,subCategory,imgLink,brand,desc}
 
    console.log(data)
