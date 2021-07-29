@@ -17,7 +17,8 @@ router.post('/signin',(req,res)=>{
 
 
 
-router.post('/create',(req,res)=>{
+router.post('/create',async (req,res)=>{
+    var proId;
 
    const amazon=req.body.amazon
    const flipkart=req.body.flipkart
@@ -34,11 +35,19 @@ router.post('/create',(req,res)=>{
    const desc=req.body.desc
 
 
+   
+
+   
+   let len;
+   await Product.find().count()
+   .then(length=>{
+       len=length;
+   })
+   proId=len+1;
+
    const data={proId,proUrl,category,subCategory,imgLink,brand,desc}
-
    console.log(data)
-
-
+   
    let product= new Product(data)
    product.save((err,product)=>{
        if(err){
@@ -47,7 +56,6 @@ router.post('/create',(req,res)=>{
                     error:"Error saving"
                 })
             }else{
-                res.json(product)
                 res.json(product)
                 console.log("Saved")
             }
