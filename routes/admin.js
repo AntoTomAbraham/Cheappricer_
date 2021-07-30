@@ -11,30 +11,14 @@ router.post('/signin',(req,res)=>{
     }else{
         return res.status(200).json({message:"signin failed"}) 
     }
+
 })
 
 
 
 
 
-
-
 router.post('/create',(req,res)=>{
-    //retrieving id
-    var proId;
-
-    fs.readFile("JSON_Data/productId.json",(err,data)=>{
-    
-        if (err) throw err;
-        const id = JSON.parse(data);
-        proId=id["id"];
-        //console.log(proId)
-        
-    });
-    //waiting initiated for 50ms for getting data
-    setTimeout(()=>{
-        console.log(proId);
-    },50);
 
    const amazon=req.body.amazon
    const flipkart=req.body.flipkart
@@ -51,7 +35,7 @@ router.post('/create',(req,res)=>{
    const desc=req.body.desc
 
 
-   const data={proId,proUrl,category,subCategory,imgLink,brand,desc}
+   const data={proId,proName,category,subCategory,imgLink,brand,desc}
 
    console.log(data)
 
