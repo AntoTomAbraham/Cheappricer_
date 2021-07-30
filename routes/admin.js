@@ -25,7 +25,7 @@ router.post('/create',async (req,res)=>{
    const croma=req.body.croma
    const relaince=req.body.reliance
    const dell=req.body.dell
-   //
+   //affiliate 
    const amazon_aff=req.body.amazon_aff
    const flipkart_aff=req.body.flipkart_aff
    const croma_aff=req.body.croma_aff
