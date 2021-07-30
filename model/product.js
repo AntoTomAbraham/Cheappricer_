@@ -30,7 +30,6 @@ const productSchema=new mongoose.Schema({
         type:String,
         trim:true,
         required:false,
-        maxlength:32,
     },
     brand:{
         type:String,
@@ -42,7 +41,6 @@ const productSchema=new mongoose.Schema({
         type:String,
         trim:true,
         required:false,
-        maxlength:32,
     },
 },{timestamps:true})
 
