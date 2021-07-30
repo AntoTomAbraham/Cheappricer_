@@ -17,7 +17,6 @@ router.post('/signin',(req,res)=>{
 
 
 
-
 router.post('/create',(req,res)=>{
 
    const amazon=req.body.amazon
