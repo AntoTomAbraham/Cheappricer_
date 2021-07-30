@@ -14,15 +14,27 @@ router.post('/signin',(req,res)=>{
 })
 
 
+
+
+
+
+
 router.post('/create',(req,res)=>{
-    let proId;
     //retrieving id
+    var proId;
+
     fs.readFile("JSON_Data/productId.json",(err,data)=>{
+    
         if (err) throw err;
         const id = JSON.parse(data);
         proId=id["id"];
+        //console.log(proId)
+        
+    });
+    //waiting initiated for 50ms for getting data
+    setTimeout(()=>{
         console.log(proId);
-    })
+    },50);
 
    const amazon=req.body.amazon
    const flipkart=req.body.flipkart
