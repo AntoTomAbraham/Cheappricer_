@@ -18,13 +18,19 @@ router.post('/signin',(req,res)=>{
 
 
 router.post('/create',async (req,res)=>{
-    var proId;
-
+   var proId;
+   //main-links-for scraping
    const amazon=req.body.amazon
    const flipkart=req.body.flipkart
    const croma=req.body.croma
    const relaince=req.body.reliance
    const dell=req.body.dell
+   //
+   const amazon_aff=req.body.amazon_aff
+   const flipkart_aff=req.body.flipkart_aff
+   const croma_aff=req.body.croma_aff
+   const relaince_aff=req.body.reliance_aff
+   const dell_aff=req.body.dell_aff
 
    var proUrl=req.body.proUrl
    const category=req.body.category
