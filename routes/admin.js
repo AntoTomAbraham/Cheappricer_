@@ -39,6 +39,7 @@ router.post('/create',(req,res)=>{
 
    console.log(data)
 
+
    let product= new Product(data)
    product.save((err,product)=>{
        if(err){
@@ -49,26 +50,14 @@ router.post('/create',(req,res)=>{
             }else{
                 res.json(product)
                 console.log("Saved")
-                proId++;
-                let newId = {
-                    "id": proId
-                }  
-                var NewId=fs.readFileSync('JSON_Data/productId.json');
-                var myObject= JSON.parse(NewId);
-                myObject.push(newId);
-                var newData = JSON.stringify(myObject);
-                fs.writeFile('JSON_Data/productId.json', newData, err => {
-                    // error checking
-                    if(err) throw err;
-                    console.log("New data added");
-                });   
             }
-   })
-
+   
+  
+   
 })
 
 
-
+})
 
 module.exports=router;
 
