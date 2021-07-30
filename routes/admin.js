@@ -25,12 +25,14 @@ router.post('/create',async (req,res)=>{
    const croma=req.body.croma
    const relaince=req.body.reliance
    const dell=req.body.dell
-   //affiliate 
+
+   //affiliate links for end user. Note: If there are no aff. links, pls insert normal links!
    const amazon_aff=req.body.amazon_aff
    const flipkart_aff=req.body.flipkart_aff
    const croma_aff=req.body.croma_aff
    const relaince_aff=req.body.reliance_aff
    const dell_aff=req.body.dell_aff
+   console.log(amazon_aff+" "+flipkart_aff+" "+croma_aff+" "+relaince_aff+" "+dell_aff)
 
    var proUrl=req.body.proUrl
    const category=req.body.category
@@ -52,7 +54,7 @@ router.post('/create',async (req,res)=>{
    proId=len+1;  //id from mongdodb
    var arrId= String(proId);
   
-   var file=fs.readFileSync('JSON_Data/product_data.json'); //reading JSON
+   var file=fs.readFileSync('JSON_Data/product_data.json'); //reading JSON --product_data.json
    var objData=JSON.parse(file); //PARSING
     objData[arrId]={ //New data object
         "p_name":proUrl,
@@ -63,14 +65,34 @@ router.post('/create',async (req,res)=>{
         "dell-pc":dell
         
     }
-    //writing into JSON
+    //writing into JSON --product_data.json
     fs.writeFile('JSON_Data/product_data.json', JSON.stringify(objData,null,2), err => {
         // error checking
         if(err) throw err;
         
         console.log("New data added");
-    });  
+    });
+    
 
+    var fileAff=fs.readFileSync('JSON_Data/affiliate_data.json'); //reading JSON --affiliate_data.json
+    var objDataAff=JSON.parse(fileAff); //PARSING
+    objDataAff[arrId]={ //New data object
+        "amazon_in":amazon_aff,
+        "flipkart":flipkart_aff,
+        "rel_digi":relaince_aff,
+        "croma":croma_aff,
+        "dell-pc":dell_aff
+        
+    }
+    //writing into JSON --affiliate_data.json
+    fs.writeFile('JSON_Data/affiliate_data.json', JSON.stringify(objDataAff,null,2), err => {
+        // error checking
+        if(err) throw err;
+        
+        console.log("New data added-Aff");
+    });
+
+    
     //db
    const data={proId,proUrl,category,subCategory,imgLink,brand,desc}
    console.log(data)
@@ -84,7 +106,7 @@ router.post('/create',async (req,res)=>{
                     error:"Error saving"
                 })
             }else{
-                res.json(product)
+                res.status(200).json(product)
                 console.log("Saved")
             }
    
