@@ -62,7 +62,7 @@ router.post('/create',async (req,res)=>{
         "flipkart":flipkart,
         "rel_digi":relaince,
         "croma":croma,
-        "dell-pc":dell
+        "dell_pc":dell
         
     }
     //writing into JSON --product_data.json
