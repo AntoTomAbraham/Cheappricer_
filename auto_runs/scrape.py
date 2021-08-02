@@ -25,22 +25,30 @@ def get_date():
 def amazon_india(url):
     page=requests.get(url,headers=headers)
     soup=BeautifulSoup(page.content,"html.parser")
-    price=soup.find(id="priceblock_ourprice").text
-    price=price[1:]
-    price=price.split(",");
-    price="".join(price)
-    return float(price)
+    try:
+        price=soup.find(id="priceblock_ourprice").text
+        price=price[1:]
+        price=price.split(",");
+        price="".join(price)
+        return float(price)
+    except:
+        return 0
+        print("Price Unavailable --AMZ_IN")
     
     
 
 def flipkart(url):
     page=requests.get(url,headers=headers)
     soup=BeautifulSoup(page.content,"html.parser")
-    price=soup.find(class_="_30jeq3 _16Jk6d").text
-    price=price[1:]
-    price=price.split(",")
-    price="".join(price)
-    return float(price)
+    try:
+        price=soup.find(class_="_30jeq3 _16Jk6d").text
+        price=price[1:]
+        price=price.split(",")
+        price="".join(price)
+        return float(price)
+    except:
+        return 0
+        print("Price Unavailable --FLP")
 
 
 def croma(url):
@@ -48,11 +56,15 @@ def croma(url):
     resp = session.get(url)
     resp.html.render()
     data=resp.html
-    price=data.find(".amount")
-    price=price[0].text
-    price=price.split(",")
-    price="".join(price)
-    return float(price)
+    try:
+        price=data.find(".amount")
+        price=price[0].text
+        price=price.split(",")
+        price="".join(price)
+        return float(price)
+    except:
+        return 0
+        print("Price Unavailable --CROMA")
     
 
 
@@ -60,22 +72,30 @@ def croma(url):
 def rel_digital(url):
     page=requests.get(url,headers=headers)
     soup=BeautifulSoup(page.content,"html.parser")
-    price=soup.find(class_="pdp__offerPrice").text
-    price=price[1:]
-    price=price.split(",")
-    price="".join(price)
-    return float(price)
+    try:
+        price=soup.find(class_="pdp__offerPrice").text
+        price=price[1:]
+        price=price.split(",")
+        price="".join(price)
+        return float(price)
+    except:
+        return 0
+        print("Price Unavailable --REL_DIGI")
 
 def dell_india_pc(url): #only for laptops & desktops
     page=requests.get(url,headers=headers)
     soup=BeautifulSoup(page.content,"html.parser")
-    price=soup.find(class_="cf-dell-price")
-    price=price.text
-    price=price.split("\n")
-    price=price[2][14:]
-    price=price.split(",")
-    price="".join(price)
-    return float(price)
+    try:
+        price=soup.find(class_="cf-dell-price")
+        price=price.text
+        price=price.split("\n")
+        price=price[2][14:]
+        price=price.split(",")
+        price="".join(price)
+        return float(price)
+    except:
+        return 0
+        print("Price Unavailable --DELL-PC")
 
 
 
@@ -100,31 +120,26 @@ for i in range(0,len(p_data)):
                     pass
                 else:
                     amazon_india_price=amazon_india(p_data[prd_id][site])
-                    print(amazon_india_price)
             elif(site=="flipkart"):
                 if(p_data[prd_id][site]==""):
                     pass
                 else:
                     flipkart_price=flipkart(p_data[prd_id][site])
-                    print(flipkart_price)
             elif(site=="rel_digi"):
                 if(p_data[prd_id][site]==""):
                     pass
                 else:
-                    rel_digital_price=p_data[prd_id][site]
-                    print(rel_digital_price)
+                    rel_digital_price=rel_digital(p_data[prd_id][site])
             elif(site=="croma"):
                 if(p_data[prd_id][site]==""):
                     pass
                 else:
                     croma_price=croma(p_data[prd_id][site])
-                    print(croma_price)
             elif(site=="dell_pc"):
                 if(p_data[prd_id][site]==""):
                     pass
                 else:
                     dell_india_pc_price=dell_india_pc(p_data[prd_id][site])
-                    print(dell_india_pc_price)
             else:
                 pass
             #opening price_data.json
@@ -156,8 +171,8 @@ for i in range(0,len(p_data)):
                 json.dump(pr_data, file,indent=4)
 
 
-
     #incrementation
+    print("PRD:",prd_id," -complete.")
     prd_id=int(prd_id)
     prd_id=prd_id+1
     prd_id=str(prd_id)
