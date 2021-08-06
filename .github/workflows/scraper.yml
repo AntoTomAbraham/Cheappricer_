@@ -29,6 +29,8 @@ jobs:
           
       - name: commit files
         run: |
+         git config --global user.email "andrewgeorgeissac@gmail.com"
+          git config --global user.name "andrew george issac"
           git add -A
           git commit -m "update data" -a
           
