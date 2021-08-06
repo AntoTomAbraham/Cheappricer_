@@ -1,8 +1,7 @@
 name: scrap-price-data
 
 on:
-  schedule:
-    - cron: '1 */6 * * *' # At minute 1 past every 6th hour
+
   workflow_dispatch:
 
 jobs:
