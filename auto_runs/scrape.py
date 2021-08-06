@@ -26,6 +26,7 @@ def amazon_india(url):
     page=requests.get(url,headers=headers)
     soup=BeautifulSoup(page.content,"html.parser")
     try:
+        time.sleep(2)
         try:
             price=soup.find(id="priceblock_ourprice").text
         except:
