@@ -26,14 +26,17 @@ def amazon_india(url):
     page=requests.get(url,headers=headers)
     soup=BeautifulSoup(page.content,"html.parser")
     try:
-        price=soup.find(id="priceblock_ourprice").text
+        try:
+            price=soup.find(id="priceblock_ourprice").text
+        except:
+            price=soup.find(id="priceblock_dealprice").text
         price=price[1:]
         price=price.split(",");
         price="".join(price)
         return float(price)
     except:
-        return 0
-        print("Price Unavailable --AMZ_IN")
+         return 0
+         print("Price Unavailable --AMZ_IN")
     
     
 
@@ -96,9 +99,6 @@ def dell_india_pc(url): #only for laptops & desktops
     except:
         return 0
         print("Price Unavailable --DELL-PC")
-
-
-
 
 
 prd_id="1"
