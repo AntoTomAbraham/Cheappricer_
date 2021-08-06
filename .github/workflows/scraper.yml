@@ -1,0 +1,37 @@
+name: scrap-price-data
+
+on:
+  schedule:
+    - cron: '1 */6 * * *' # At minute 1 past every 6th hour
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: checkout repo content
+        uses: actions/checkout@v2 # checkout the repository content to github runner
+
+      - name: setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.7.7' # install the python version needed
+          
+      - name: install python packages
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r auto_runs/requirements.txt
+          
+      - name: execute py script # run scrape.py to get the latest data
+
+        run: python auto_runs/scrape.py
+          
+      - name: commit files
+        run: |
+          git add -A
+          git commit -m "update data" -a
+          
+      - name: push changes
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          branch: main  
