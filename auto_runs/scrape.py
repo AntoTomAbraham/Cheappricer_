@@ -34,6 +34,7 @@ def amazon_india(url):
         price=price[1:]
         price=price.split(",");
         price="".join(price)
+        print(price)
         return float(price)
     except:
          return 0
@@ -121,7 +122,6 @@ for i in range(0,len(p_data)):
                     pass
                 else:
                     amazon_india_price=amazon_india(p_data[prd_id][site])
-                    print(amazon_india_price);
             elif(site=="flipkart"):
                 if(p_data[prd_id][site]==""):
                     pass
