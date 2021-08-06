@@ -120,6 +120,7 @@ for i in range(0,len(p_data)):
                     pass
                 else:
                     amazon_india_price=amazon_india(p_data[prd_id][site])
+                    print(amazon_india_price);
             elif(site=="flipkart"):
                 if(p_data[prd_id][site]==""):
                     pass
@@ -135,6 +136,7 @@ for i in range(0,len(p_data)):
                     pass
                 else:
                     croma_price=croma(p_data[prd_id][site])
+                    
             elif(site=="dell_pc"):
                 if(p_data[prd_id][site]==""):
                     pass
