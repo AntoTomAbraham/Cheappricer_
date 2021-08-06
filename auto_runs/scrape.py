@@ -29,13 +29,17 @@ def amazon_india(url):
         time.sleep(2)
         try:
             price=soup.find(id="priceblock_ourprice").text
+            price=price[1:]
+            price=price.split(",");
+            price="".join(price)
+            return float(price)
         except:
             price=soup.find(id="priceblock_dealprice").text
-        price=price[1:]
-        price=price.split(",");
-        price="".join(price)
-        print(price)
-        return float(price)
+            price=price[1:]
+            price=price.split(",");
+            price="".join(price)
+            return float(price)
+            
     except:
          return 0
          print("Price Unavailable --AMZ_IN")
