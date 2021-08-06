@@ -41,7 +41,7 @@ def amazon_india(url):
             return float(price)
             
     except:
-         return 0
+         return "not-available"
          print("Price Unavailable --AMZ_IN")
     
     
