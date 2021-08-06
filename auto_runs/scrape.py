@@ -26,14 +26,16 @@ def amazon_india(url):
     page=requests.get(url,headers=headers)
     soup=BeautifulSoup(page.content,"html.parser")
     try:
-        price=soup.find(id="priceblock_ourprice").text
+        price=soup.find(class_="a-size-medium a-color-price priceBlockDealPriceString").text
+        price=price[1:]
+        price=price.split(",");
+        price="".join(price)
+        return float(price)
     except:
-        price=soup.find(id="priceblock_dealprice").text
+        return 0
+        print("AMZ-IN price not available.")
 
-    price=price[1:]
-    price=price.split(",");
-    price="".join(price)
-    return float(price)        
+            
 
     
 
