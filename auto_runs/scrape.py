@@ -23,17 +23,23 @@ def get_date():
 
 
 def amazon_india(url):
-    time.sleep(3)
-    page=requests.get(url,headers=headers)
-    soup=BeautifulSoup(page.content,"html.parser")
     try:
-        price=soup.find(class_="a-size-medium a-color-price priceBlockDealPriceString").text
+        time.sleep(3)
+        try:
+            page=requests.get(url,headers=headers)
+            soup=BeautifulSoup(page.content,"html.parser")
+            price=soup.find(class_="a-size-medium a-color-price priceBlockDealPriceString").text
+        except:
+            page=requests.get(url,headers=headers)
+            soup=BeautifulSoup(page.content,"html.parser")
+            price=soup.find(class_="a-size-medium a-color-price priceBlockBuyingPriceString").text
+        price=price[1:]
+        price=price.split(",");
+        price="".join(price)
+        return float(price)
     except:
-        price=soup.find(class_="a-size-medium a-color-price priceBlockBuyingPriceString").text
-    price=price[1:]
-    price=price.split(",");
-    price="".join(price)
-    return float(price)
+        return 0
+        print("Price Unavailable --AMZIN")
 
 
             
