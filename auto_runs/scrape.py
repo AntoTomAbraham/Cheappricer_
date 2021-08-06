@@ -115,7 +115,7 @@ date=get_date() #getting date
 p_data=open("JSON_Data/product_data.json")
 p_data=json.load(p_data)
 for i in range(0,len(p_data)):
-    amazon_india_price=dell_india_pc_price=rel_digital_price=croma_price=flipkart_price=0
+    amazon_india_price=dell_india_pc_price=rel_digital_price=croma_price=flipkart_price=-1
     sites=p_data[prd_id].keys()
     for site in sites:
         if(site=="p_name"):
