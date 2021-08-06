@@ -27,17 +27,13 @@ def amazon_india(url):
     soup=BeautifulSoup(page.content,"html.parser")
     try:
         price=soup.find(id="priceblock_ourprice").text
-        price=price[1:]
-        price=price.split(",");
-        price="".join(price)
-        return float(price)
     except:
         price=soup.find(id="priceblock_dealprice").text
-        price=price[1:]
-        price=price.split(",");
-        price="".join(price)
-        return float(price)
-            
+
+    price=price[1:]
+    price=price.split(",");
+    price="".join(price)
+    return float(price)        
 
     
 
