@@ -31,8 +31,8 @@
             "dell_india_pc": 0
         },
         "06-08-2021": {
-            "amazon_india": 16999.0,
-            "flipkart": 17458.0,
+            "amazon_india": "not-available",
+            "flipkart": 17448.0,
             "rel_digi": 0,
             "croma": 0,
             "dell_india_pc": 0
@@ -47,8 +47,8 @@
             "dell_india_pc": 0
         },
         "06-08-2021": {
-            "amazon_india": 0,
-            "flipkart": 16890.0,
+            "amazon_india": "not-available",
+            "flipkart": 16875.0,
             "rel_digi": 16499.0,
             "croma": 0,
             "dell_india_pc": 0
