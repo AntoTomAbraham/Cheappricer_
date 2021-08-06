@@ -23,9 +23,13 @@ def get_date():
 
 
 def amazon_india(url):
+    time.sleep(3)
     page=requests.get(url,headers=headers)
     soup=BeautifulSoup(page.content,"html.parser")
-    price=soup.find(class_="a-size-medium a-color-price priceBlockDealPriceString").text
+    try:
+        price=soup.find(class_="a-size-medium a-color-price priceBlockDealPriceString").text
+    except:
+        price=soup.find(class_="a-size-medium a-color-price priceBlockBuyingPriceString").text
     price=price[1:]
     price=price.split(",");
     price="".join(price)
@@ -97,81 +101,82 @@ def dell_india_pc(url): #only for laptops & desktops
         print("Price Unavailable --DELL-PC")
 
 
-prd_id="1"
+# prd_id="1"
 
-#getting data & running scrapping funcs from product_data.json
-date=get_date() #getting date
+# #getting data & running scrapping funcs from product_data.json
+# date=get_date() #getting date
 
-p_data=open("JSON_Data/product_data.json")
-p_data=json.load(p_data)
-for i in range(0,len(p_data)):
-    amazon_india_price=dell_india_pc_price=rel_digital_price=croma_price=flipkart_price=0
-    sites=p_data[prd_id].keys()
-    for site in sites:
-        if(site=="p_name"):
-            pass
-        else:
-            if(site=="amazon_in"):
-                if(p_data[prd_id][site]==""):
-                    pass
-                else:
-                    amazon_india_price=amazon_india(p_data[prd_id][site])
-                    print(amazon_india_price)
-            elif(site=="flipkart"):
-                if(p_data[prd_id][site]==""):
-                    pass
-                else:
-                    flipkart_price=flipkart(p_data[prd_id][site])
-            elif(site=="rel_digi"):
-                if(p_data[prd_id][site]==""):
-                    pass
-                else:
-                    rel_digital_price=rel_digital(p_data[prd_id][site])
-            elif(site=="croma"):
-                if(p_data[prd_id][site]==""):
-                    pass
-                else:
-                    croma_price=croma(p_data[prd_id][site])
+# p_data=open("JSON_Data/product_data.json")
+# p_data=json.load(p_data)
+# for i in range(0,len(p_data)):
+#     amazon_india_price=dell_india_pc_price=rel_digital_price=croma_price=flipkart_price=0
+#     sites=p_data[prd_id].keys()
+#     for site in sites:
+#         if(site=="p_name"):
+#             pass
+#         else:
+#             if(site=="amazon_in"):
+#                 if(p_data[prd_id][site]==""):
+#                     pass
+#                 else:
+#                     amazon_india_price=amazon_india(p_data[prd_id][site])
+#                     print(amazon_india_price)
+#             elif(site=="flipkart"):
+#                 if(p_data[prd_id][site]==""):
+#                     pass
+#                 else:
+#                     flipkart_price=flipkart(p_data[prd_id][site])
+#             elif(site=="rel_digi"):
+#                 if(p_data[prd_id][site]==""):
+#                     pass
+#                 else:
+#                     rel_digital_price=rel_digital(p_data[prd_id][site])
+#             elif(site=="croma"):
+#                 if(p_data[prd_id][site]==""):
+#                     pass
+#                 else:
+#                     croma_price=croma(p_data[prd_id][site])
                     
-            elif(site=="dell_pc"):
-                if(p_data[prd_id][site]==""):
-                    pass
-                else:
-                    dell_india_pc_price=dell_india_pc(p_data[prd_id][site])
-            else:
-                pass
-            #opening price_data.json
-            pr_data=open("JSON_Data/price_data.json")
-            pr_data=json.load(pr_data)        
+#             elif(site=="dell_pc"):
+#                 if(p_data[prd_id][site]==""):
+#                     pass
+#                 else:
+#                     dell_india_pc_price=dell_india_pc(p_data[prd_id][site])
+#             else:
+#                 pass
+#             #opening price_data.json
+#             pr_data=open("JSON_Data/price_data.json")
+#             pr_data=json.load(pr_data)        
 
-            #creating json object for price data
-            price_data={
-                    date:{
-                        "amazon_india":amazon_india_price,
-                        "flipkart":flipkart_price,
-                        "rel_digi":rel_digital_price,
-                        "croma":croma_price,
-                        "dell_india_pc":dell_india_pc_price
-                    }
-            }
+#             #creating json object for price data
+#             price_data={
+#                     date:{
+#                         "amazon_india":amazon_india_price,
+#                         "flipkart":flipkart_price,
+#                         "rel_digi":rel_digital_price,
+#                         "croma":croma_price,
+#                         "dell_india_pc":dell_india_pc_price
+#                     }
+#             }
 
-            #appending
+#             #appending
 
-            try:
-                pr_data[prd_id].update(price_data)
+#             try:
+#                 pr_data[prd_id].update(price_data)
 
 
-            except:
-                pr_data[prd_id]=price_data  #for new ids
+#             except:
+#                 pr_data[prd_id]=price_data  #for new ids
             
-            with open("JSON_Data/price_data.json", "w") as file:
-                file.seek(0)
-                json.dump(pr_data, file,indent=4)
+#             with open("JSON_Data/price_data.json", "w") as file:
+#                 file.seek(0)
+#                 json.dump(pr_data, file,indent=4)
 
 
-    #incrementation
-    print("PRD:",prd_id," -complete.")
-    prd_id=int(prd_id)
-    prd_id=prd_id+1
-    prd_id=str(prd_id)
+#     #incrementation
+#     print("PRD:",prd_id," -complete.")
+#     prd_id=int(prd_id)
+#     prd_id=prd_id+1
+#     prd_id=str(prd_id)
 
+print(amazon_india("https://www.amazon.in/Renewed-Mi-Smart-Band/dp/B07Y7KX24R/?_encoding=UTF8&pd_rd_w=oBcUH&pf_rd_p=ab97f17b-e4d4-4b9c-ad84-49b21e32c77f&pf_rd_r=YQCE0Y8BYRG59VEKMP37&pd_rd_r=3872737c-e802-4ba3-8025-df52641ae962&pd_rd_wg=YdQKd&ref_=pd_gw_unk"))
