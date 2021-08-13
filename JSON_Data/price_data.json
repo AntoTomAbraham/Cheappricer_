@@ -22,7 +22,21 @@
             "dell_india_pc": -1
         },
         "07-08-2021": {
-            "amazon_india": 0,
+            "amazon_india": 13999.0,
+            "flipkart": 15849.0,
+            "rel_digi": -1,
+            "croma": 14999.0,
+            "dell_india_pc": -1
+        },
+        "08-08-2021": {
+            "amazon_india": 13999.0,
+            "flipkart": 15849.0,
+            "rel_digi": -1,
+            "croma": 14999.0,
+            "dell_india_pc": -1
+        },
+        "09-08-2021": {
+            "amazon_india": 13999.0,
             "flipkart": 15849.0,
             "rel_digi": -1,
             "croma": 14999.0,
@@ -45,8 +59,22 @@
             "dell_india_pc": -1
         },
         "07-08-2021": {
-            "amazon_india": 0,
-            "flipkart": 17392.0,
+            "amazon_india": 16999.0,
+            "flipkart": 17376.0,
+            "rel_digi": -1,
+            "croma": -1,
+            "dell_india_pc": -1
+        },
+        "08-08-2021": {
+            "amazon_india": 16999.0,
+            "flipkart": 17355.0,
+            "rel_digi": -1,
+            "croma": -1,
+            "dell_india_pc": -1
+        },
+        "09-08-2021": {
+            "amazon_india": 16999.0,
+            "flipkart": 17325.0,
             "rel_digi": -1,
             "croma": -1,
             "dell_india_pc": -1
@@ -68,8 +96,22 @@
             "dell_india_pc": -1
         },
         "07-08-2021": {
-            "amazon_india": 0,
-            "flipkart": 16845.0,
+            "amazon_india": 14999.0,
+            "flipkart": 16990.0,
+            "rel_digi": 16499.0,
+            "croma": -1,
+            "dell_india_pc": -1
+        },
+        "08-08-2021": {
+            "amazon_india": 14999.0,
+            "flipkart": 16990.0,
+            "rel_digi": 16499.0,
+            "croma": -1,
+            "dell_india_pc": -1
+        },
+        "09-08-2021": {
+            "amazon_india": 14999.0,
+            "flipkart": 16990.0,
             "rel_digi": 16499.0,
             "croma": -1,
             "dell_india_pc": -1

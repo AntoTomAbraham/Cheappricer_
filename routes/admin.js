@@ -4,7 +4,7 @@ const fs = require("fs");
 const Product=require('../model/product')
 const bodyParser = require('body-parser')
 router.use(bodyParser.json())
-//const urlencodedParser = bodyParser.urlencoded({ extended: false })
+const urlencodedParser = bodyParser.urlencoded({ extended: true })
 
 router.get('/',(req,res)=>{
     res.render('admin')

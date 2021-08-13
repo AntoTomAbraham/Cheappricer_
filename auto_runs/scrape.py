@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
-import requests,datetime,json,time
+import requests,json,time
 from requests_html import HTMLSession
+from datetime import datetime
 
 headers = { 
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', 
@@ -16,10 +17,9 @@ headers = {
 # ALL RETURNING PRICES ARE IN FLOAT FORMAT
 
 def get_date():
-    dateval=str(datetime.date.today()) #date
-    date=dateval.split('-')
-    date=date[2]+'-'+date[1]+'-'+date[0]
-    return date
+    now = datetime.now()
+    dt_string = now.strftime("%d-%m-%Y")
+    return dt_string
 
 
 def amazon_india(url):
