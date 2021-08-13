@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div style="margin-left:45px; width:100%;">
+    <div class="container register" >
+        <div class="row">
+            <div class="col-md-3 register-left">
+                <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
+                <h3>Welcome</h3>
+                <p>Add products as fast as possible</p>
+                <input type="submit" name="" value="🚀🚀🚀🚀"/><br/>
+            </div>
+            <div class="col-md-9 register-right">
+                <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <h3 class="register-heading">Add your Product 🚀🚀</h3>
+                        
+                        <form action="/admin/create" method="POST">
+                        <!-- <div class="row register-form"> -->
+                            <!-- <div class="col-md-6"> -->
+                                <input type="text" class="form-control" placeholder="Product Url *" name="proUrl"/>
+                                <br />
+                                <input type="text" class="form-control" placeholder="Image Link *"  name="imgLink"/>
+                                 <br />
+                                 <h6>Category</h6>
+                                 <select class="form-select" aria-label="Default select example"  name="category">
+                                   <option value="Books">Electronics</option>
+                                   <option value="Mobiles and Computers">Mobiles and Computers</option>
+                                   <option value="sports">Sports</option>
+                                   <option value="Bags">Bags</option>
+                                   <option value="Toys">Toys</option>
+                                   <option value="Video games">Video Games</option>
+                                   <option value="Beauty">Beauty</option>
+                                   <option value="Health">Health</option>
+                                   <option value="LifeStyle">LifeStyle</option>
+                                 </select>
+                                 <br />
+                                 <h6>Sub Category</h6>
+                                 <select class="form-select" aria-label="Default select example" name="subCategory"   >
+                                   <option value="Mobile Phones">Mobile Phones</option>
+                                   <option value="Laptops">Laptops</option>
+                                   <option value="Mouse">Mouse</option>
+                                   <option value="Keyboard">Keyboard</option>
+                                   <option value="HeadPhone">HeadPhone</option>
+                                   <option value="Speaker">Speaker</option>
+                                   <option value="BackBag">BackBag</option>
+                                   <option value="Trolley Bag">Trolley Bag</option>
+                                   <option value="SideBag">SideBag</option>
+                                   <option value="Football">Football</option>
+                                   <option value="CricketBall">Cricket Ball</option>
+                                   <option value="CricketBat">Cricket Bat</option>
+                                   <option value="Shoes">Shoes</option>
+                                   <option value="Chappals">Chappals</option>
+                                   <option value="Refridgerator">Refridgerator</option>
+                                   <option value="Air Conditioner">Air Conditioner</option>
+                                   <option value="Oven">Oven</option>
+                                 </select>
+                                 <br />
+                            <!-- </div> -->
+                            <!-- <div class="col-md-6"> -->
+                                 
+                                <br />
+                                <h6>Brand</h6>
+                                 <select class="form-select" aria-label="Default select example" name="brand"  >
+                                   <option value="Nokia">Nokia</option>
+                                   <option value="Apple">Apple</option>
+                                   <option value="Redmi">Redmi</option>
+                                   <option value="Oppo">Oppo</option>
+                                   <option value="Acer">Acer</option>
+                                   <option value="Asus">Asus</option>
+                                   <option value="Xiaomi">Xiaomi</option>
+                                   <option value="Honor">Honor</option>
+                                   <option value="HP">HP</option>
+                                   <option value="Dell">Dell</option>
+                                   <option value="Puma">Puma</option>
+                                   <option value="Adidas">Adidas</option>
+                                   <option value="F gear">F gear</option>
+                                   <option value="Skybag">Skybag</option>
+                                   <option value="American Express">American Express</option>
+                                   <option value="Fila">Fila</option>
+                                   <option value="Zebronics">Zebronics</option>
+                                   <option value="JBL">JBL</option>
+                                 </select>
+                                 <br />
+                               
+                                    <input type="text"   name="desc" class="form-control" placeholder="Description"  />
+                               
+                                <br />
+                                
+                                    <input type="text"  name="amazon" class="form-control" placeholder="Amazon" />
+                                
+                                <br />
+                                
+                                    <input type="text"  name="flipkart" class="form-control" placeholder="Flipkart"/>
+                               
+                                <br />
+                              
+                                    <input type="text"  name="croma" class="form-control" placeholder="croma"  />
+                               
+                                <br />
+                               
+                                    <input type="text"  name="reliance" class="form-control" placeholder="reliance" />
+                              
+                                <br />
+                              
+                                    <input type="text"   name="dell" class="form-control" placeholder="Dell" />
+                                
+                                <br />
+                                <button type="submit" class="btn btn-info"  class="btnRegister">Submit</button>
+                            <!-- </div> -->
+                        <!-- </div> -->
+                    </form>
+                    </div>
+                    <!-- <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">               
+                        <div class="row register-form">
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+     </div>
+    </div>
+</body>
+</html>

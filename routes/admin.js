@@ -2,6 +2,14 @@ var express = require('express')
 var router = express.Router()
 const fs = require("fs");
 const Product=require('../model/product')
+const bodyParser = require('body-parser')
+router.use(bodyParser.json())
+//const urlencodedParser = bodyParser.urlencoded({ extended: false })
+
+router.get('/',(req,res)=>{
+    res.render('admin')
+})
+
 
 router.post('/signin',(req,res)=>{
     const {email, password}=req.body;
@@ -18,6 +26,8 @@ router.post('/signin',(req,res)=>{
 
 
 router.post('/create',async (req,res)=>{
+   
+   console.log(req.body+"req.body")
    var proId;
    //main-links-for scraping
    const amazon=req.body.amazon

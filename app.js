@@ -2,28 +2,21 @@ const express=require('express');
 const app=express()
 const bodyParser=require("body-parser")
 const mongoose=require('mongoose');
-
+app.set('view engine', 'ejs');
 app.use(bodyParser.json())
-app.use(express.static('./client/build'));
+const path=require('path')
+
 
 app.get("/",(req,res)=>{
     return res.json("haiii")
 })
 
+
+
 const adminRoutes=require('./routes/admin')
 app.use('/admin',adminRoutes)
 
-// if (process.env.NODE_ENV === "production") {
-//     app.use(express.static("client/build")); // change this if your dir structure is different
-//     app.get("*", (req, res) => {
-//       res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-//     });
-//   }
 
-app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build",     
-    "index.html"));
- });
 
 mongoose.connect(
     "mongodb+srv://CheapPricer:Cheappricer@_2021@cluster0.ivs2l.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
