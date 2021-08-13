@@ -2,12 +2,12 @@ name: scrap-price-data
 
 on:
   schedule:
-    - cron: '30 4,10 * * *'   #runs @4:30am & @10:30 UTC everyday [10:00am & 04:00pm IST]   #cron set using: https://crontab.guru/ #timeconv. converter: https://savvytime.com/converter/utc-to-ist 
+    - cron: '00 4,10 * * *'   #runs @4:00am & @10:00 UTC everyday [09:30am & 03:30pm IST]   #cron set using: https://crontab.guru/ #timeconv. converter: https://savvytime.com/converter/utc-to-ist 
   workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
 
       - name: checkout repo content
@@ -29,13 +29,14 @@ jobs:
           
       - name: commit files
         run: |
-         git config --global user.email "andrewgeorgeissac@gmail.com"
+          git config --global user.email "andrewgeorgeissac@gmail.com"
           git config --global user.name "andrew george issac"
           git add -A
-          git commit -m "update data" -a
+          git commit -m "price update" -a
           
       - name: push changes
         uses: ad-m/github-push-action@v0.6.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}main
           branch: main  
+
