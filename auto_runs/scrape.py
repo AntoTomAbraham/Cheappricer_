@@ -107,6 +107,14 @@ def dell_india_pc(url): #only for laptops & desktops
         print("Price Unavailable --DELL-PC")
 
 
+#mailing
+def mail_notify(url,site,p_name):
+    #https://maker.ifttt.com/trigger/0_price_trigger/with/key/d644tRYtonOY6HC4kM02Zg?Value1=Alex&Value2=Helen
+    url="https://maker.ifttt.com/trigger/0_price_trigger/with/key/d644tRYtonOY6HC4kM02Zg?value1="+site+"&value2="+url+"&value3="+p_name
+    requests.post(url)
+    
+
+
 prd_id="1"
 
 #getting data & running scrapping funcs from product_data.json
@@ -126,28 +134,40 @@ for i in range(0,len(p_data)):
                     pass
                 else:
                     amazon_india_price=amazon_india(p_data[prd_id][site])
-                    print(amazon_india_price)
+                    if(amazon_india_price==0):
+                        mail_notify(p_data[prd_id][site],"Amazon_India",p_data[prd_id]["p_name"])
+
             elif(site=="flipkart"):
                 if(p_data[prd_id][site]==""):
                     pass
                 else:
                     flipkart_price=flipkart(p_data[prd_id][site])
+                    if(flipkart_price==0):
+                        mail_notify(p_data[prd_id][site],"Flipkart",p_data[prd_id]["p_name"])
+
             elif(site=="rel_digi"):
                 if(p_data[prd_id][site]==""):
                     pass
                 else:
                     rel_digital_price=rel_digital(p_data[prd_id][site])
+                    if(rel_digital_price==0):
+                        mail_notify(p_data[prd_id][site],"Reliance_Digital",p_data[prd_id]["p_name"])
+
             elif(site=="croma"):
                 if(p_data[prd_id][site]==""):
                     pass
                 else:
                     croma_price=croma(p_data[prd_id][site])
+                    if(croma_price==0):
+                        mail_notify(p_data[prd_id][site],"croma",p_data[prd_id]["p_name"])
                     
             elif(site=="dell_pc"):
                 if(p_data[prd_id][site]==""):
                     pass
                 else:
                     dell_india_pc_price=dell_india_pc(p_data[prd_id][site])
+                    if(dell_india_pc_price==0):
+                        mail_notify(p_data[prd_id][site],"Dell_India_pc",p_data[prd_id]["p_name"])
             else:
                 pass
             #opening price_data.json
