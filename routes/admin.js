@@ -4,14 +4,20 @@ const fs = require("fs");
 const Product=require('../model/product')
 const bodyParser = require('body-parser')
 router.use(bodyParser.json())
-const urlencodedParser = bodyParser.urlencoded({ extended: true })
 
-router.get('/',(req,res)=>{
+
+//app-config
+const app=express();
+app.use(bodyParser.urlencoded({extended: true}));
+
+
+
+app.get('/',(req,res)=>{
     res.render('admin')
 })
 
 
-router.post('/signin',(req,res)=>{
+app.post('/signin',(req,res)=>{
     const {email, password}=req.body;
     if(email== "admin@cheappricer.in" && password=="kochilive@_2021"){
         return res.status(200).json({message:"signin"})
@@ -25,7 +31,7 @@ router.post('/signin',(req,res)=>{
 
 
 
-router.post('/create',async (req,res)=>{
+app.post('/create',async (req,res)=>{
    
    console.log(req.body+"req.body")
    var proId;
@@ -127,5 +133,5 @@ router.post('/create',async (req,res)=>{
 
 })
 
-module.exports=router;
+module.exports=app;
 
