@@ -41,14 +41,13 @@ app.post('/create',async (req,res)=>{
    const croma=req.body.croma
    const relaince=req.body.reliance
    const dell=req.body.dell
-
+   
    //affiliate links for end user. Note: If there are no aff. links, pls insert normal links!
    const amazon_aff=req.body.amazon_aff
    const flipkart_aff=req.body.flipkart_aff
    const croma_aff=req.body.croma_aff
    const relaince_aff=req.body.reliance_aff
    const dell_aff=req.body.dell_aff
-   console.log(amazon_aff+" "+flipkart_aff+" "+croma_aff+" "+relaince_aff+" "+dell_aff)
 
    var proUrl=req.body.proUrl
    const category=req.body.category
