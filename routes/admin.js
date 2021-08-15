@@ -6,7 +6,9 @@ const bodyParser = require('body-parser')
 router.use(bodyParser.json())
 
 
-//app-config
+// require("dotenv").config()
+
+
 const app=express();
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -123,11 +125,23 @@ app.post('/create',async (req,res)=>{
             }else{
                 res.status(200).json(product)
                 console.log("Saved")
-            }
-   
-  
-   
+
+                
+            }  
+}
+)
+
+app.get('/json',(req,res)=>{
+    fs.readfile('JSON_Data/product_data.json',"utf8", (err, jsonString)=>{
+        if(err){
+            console.log("error")
+        }else{
+            res.json(jsonString)
+        }
+    })
+    
 })
+
 
 
 })
