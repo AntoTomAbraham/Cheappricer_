@@ -130,21 +130,37 @@ app.post('/create',async (req,res)=>{
             }  
 }
 )
+})
 
-app.get('/json',(req,res)=>{
-    fs.readfile('JSON_Data/product_data.json',"utf8", (err, jsonString)=>{
+app.get('/Productjson',(req,res)=>{
+    fs.readFile('JSON_Data/product_data.json',"utf8", (err, jsonString)=>{
         if(err){
             console.log("error")
         }else{
-            res.json(jsonString)
+            //console.log(jsonString)
+            res.json(JSON.parse(jsonString))
         }
     })
+    //res.send("admin")
+    
+})
+
+app.get('/Pricejson',(req,res)=>{
+    fs.readFile('JSON_Data/price_data.json',"utf8", (err, jsonString)=>{
+        if(err){
+            console.log("error")
+        }else{
+            //console.log(jsonString)
+            res.json(JSON.parse(jsonString))
+        }
+    })
+    //res.send("admin")
     
 })
 
 
 
-})
+
 
 module.exports=app;
 
