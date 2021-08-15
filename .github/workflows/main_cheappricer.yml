@@ -12,7 +12,6 @@ on:
       - scrap-price-data
     types:
       - completed
-
   workflow_dispatch:
 
 jobs:
@@ -32,6 +31,7 @@ jobs:
         npm install
         npm run build --if-present
         npm run test --if-present
+
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v2
       with:
@@ -57,5 +57,5 @@ jobs:
       with:
         app-name: 'cheappricer'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_13cfc096b387401cb8bf43640422eda2 }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_8646d5b389a64778aa11c69bdc32a7f8 }}
         package: .
