@@ -1,5 +1,6 @@
 var express = require('express')
 var router = express.Router()
+var cmd=require('node-cmd');
 const fs = require("fs");
 const Product=require('../model/product')
 const bodyParser = require('body-parser')
@@ -34,7 +35,7 @@ app.post('/signin',(req,res)=>{
 
 
 app.post('/create',async (req,res)=>{
-   
+
    console.log(req.body+"req.body")
    var proId;
    //main-links-for scraping
@@ -122,14 +123,14 @@ app.post('/create',async (req,res)=>{
                 res.status(400).json({
                     error:"Error saving"
                 })
-            }else{
+        }
+        else{
                 res.status(200).json(product)
                 console.log("Saved")
-
-                
             }  
-}
-)
+    })
+    const syncDir=cmd.runSync('git add . && git commit -m "data_change" && git push -u origin main'); //running in cmd
+
 })
 
 app.get('/Productjson',(req,res)=>{
