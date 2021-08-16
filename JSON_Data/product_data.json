@@ -30,5 +30,53 @@
     "rel_digi": "",
     "croma": "",
     "dell_pc": ""
+  },
+  "5": {
+    "p_name": "OnePlus-Nord-CE-5G-8GB-RAM-128GB-Storage",
+    "amazon_in": "https://www.amazon.in/OnePlus-Nord-Charcoal-128GB-Storage/dp/B09576CYNP/ref=sr_1_1?dchild=1&keywords=oneplus&qid=1629175109&sr=8-1",
+    "flipkart": "",
+    "rel_digi": "https://www.reliancedigital.in/oneplus-nord-ce-5g-128-gb-8-gb-ram-blue-void-smartphone/p/491996838",
+    "croma": "https://www.croma.com/oneplus-nord-ce-5g-128gb-rom-8gb-ram-blue-void-/p/235153",
+    "dell_pc": ""
+  },
+  "6": {
+    "p_name": "OnePlus-Nord-CE-5G-(Charcoal-Ink-6GB-RAM-128GB-Storage)",
+    "amazon_in": "https://www.amazon.in/OnePlus-Nord-Charcoal-128GB-Storage/dp/B095735P11/ref=sr_1_2?dchild=1&keywords=oneplus&qid=1629175109&sr=8-2",
+    "flipkart": "",
+    "rel_digi": "https://www.reliancedigital.in/oneplus-nord-ce-5g-128-gb-6-gb-ram-charcoal-ink-smartphone/p/491996835",
+    "croma": "",
+    "dell_pc": ""
+  },
+  "7": {
+    "p_name": "OnePlus-Nord-CE-5G-12GB-RAM-256GB-Storage",
+    "amazon_in": "https://www.amazon.in/OnePlus-Nord-Charcoal-256GB-Storage/dp/B09575YG72/ref=sr_1_7?dchild=1&keywords=oneplus&qid=1629175109&sr=8-7",
+    "flipkart": "",
+    "rel_digi": "https://www.reliancedigital.in/oneplus-nord-ce-5g-256-gb-12-gb-ram-silver-ray-smartphone/p/491996840",
+    "croma": "https://www.croma.com/oneplus-nord-ce-5g-256gb-rom-12gb-ram-silver-ray-/p/235155",
+    "dell_pc": ""
+  },
+  "8": {
+    "p_name": "OnePlus-9R-5G-(Lake-Blue-8GB-RAM-128GB-Storage)",
+    "amazon_in": "https://www.amazon.in/Test-Exclusive_2020_1180-Multi-3GB-Storage/dp/B089MT34QL/ref=sr_1_11?dchild=1&keywords=oneplus&qid=1629178290&sr=8-11",
+    "flipkart": "",
+    "rel_digi": "https://www.reliancedigital.in/oneplus-9r-128-gb-8-gb-ram-lake-blue-smartphone/p/491996354",
+    "croma": "https://www.croma.com/oneplus-9r-128gb-rom-8gb-ram-le2101-lake-blue-/p/233912",
+    "dell_pc": ""
+  },
+  "9": {
+    "p_name": "Sony-WF-XB700-Extra-Bass-True-Wireless-(TWS)-Bluetooth-Earbuds-with-18hrs-Battery-Life,-Splash-Proof,-BT-Ver-5.0,-Quick-Charge",
+    "amazon_in": "https://www.amazon.in/Sony-WF-XB700-Wireless-Bluetooth-Headphones/dp/B085VQFZ91/ref=sr_1_3?dchild=1&keywords=SONY+WF-XB700&qid=1629178978&sr=8-3",
+    "flipkart": "https://www.flipkart.com/sony-wf-xb700-18-hours-battery-life-bluetooth-headset/p/itm266e2db951f0a?pid=ACCFSNJEUEKZZBXM&lid=LSTACCFSNJEUEKZZBXMS3M8MS&marketplace=FLIPKART&store=0pm&srno=b_1_1&otracker=hp_rich_navigation_1_1.navigationCard.RICH_NAVIGATION_Electronics~Audio~All_9JGNW7M0TUHD&otracker1=hp_rich_navigation_PINNED_neo%2Fmerchandising_NA_NAV_EXPANDABLE_navigationCard_cc_1_L2_view-all&fm=organic&iid=en_8%2BMgsIWO4nUnsZSdauzyoA0kcfQ1qG4juiG%2BpttpvM7XvlpfeAxVdYiUrVPJvdYYUblYEmzNYcpEEK2iRB4B2g%3D%3D&ppt=browse&ppn=browse&ssid=w1q18xla340000001629178928258",
+    "rel_digi": "https://www.reliancedigital.in/sony-wf-xb700-truly-wireless-extra-bass-bluetooth-earbuds-headphones-true-wireless-earbuds-with-mic-for-phone-calls-18-hours-battery-life-quick-charge-bt-ver-5-0-blue-/p/491895014",
+    "croma": "https://www.croma.com/sony-in-ear-truly-wireless-earbuds-with-mic-bluetooth-5-0-wf-xb700-blue-/p/227836",
+    "dell_pc": ""
+  },
+  "10": {
+    "p_name": "JBL-Tune-215TWS-In-Ear-Truly-Wireless-Earbuds-with-Mic-(Bluetooth-5.0,-Stereo-Sound,-Black)",
+    "amazon_in": "",
+    "flipkart": "https://www.flipkart.com/jbl-tune-215tws-bluetooth-headset/p/itmd2d050cb11d65?pid=ACCFWYN5FHDPMY6H&lid=LSTACCFWYN5FHDPMY6HBFNYQM&marketplace=FLIPKART&q=jbl+215+tws&store=0pm%2Ffcn&srno=s_1_1&otracker=AS_QueryStore_OrganicAutoSuggest_1_8_na_na_ps&otracker1=AS_QueryStore_OrganicAutoSuggest_1_8_na_na_ps&fm=SEARCH&iid=e5f614db-f6d4-4a66-9ddc-0c3021586479.ACCFWYN5FHDPMY6H.SEARCH&ppt=sp&ppn=sp&ssid=6l47aj2nnk0000001629180877089&qH=f3e4abd9975d0d71",
+    "rel_digi": "https://www.reliancedigital.in/jbl-tune-215tws-wireless-earbud-with-voice-assistant-hands-free-call-black/p/491934582?gclid=CjwKCAjwmeiIBhA6EiwA-uaeFVv9FzXPkYbn6bvYVBlAm2EQ2f669MVTg8eSKWZRVqr8knPL4JTH5BoCvA0QAvD_BwE",
+    "croma": "https://www.croma.com/jbl-tune-215tws-in-ear-truly-wireless-earbuds-with-mic-bluetooth-5-0-stereo-sound-black-/p/229669",
+    "dell_pc": ""
   }
 }
