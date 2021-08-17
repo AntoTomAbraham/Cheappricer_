@@ -1,9 +1,46 @@
+html{
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+
+}
+body{
+  background-color: white !important;
+  margin: 0;
+  max-width: 100%;
+}
+
+.logo-img{
+  border: 5px solid #D27F1D;
+  box-sizing: border-box;
+  border-radius: 65px;
+}
+
+.logo-text{
+  padding-top: 40px;
+  padding-left: 5px;
+}
+
+.flex{
+  flex-wrap: wrap;
+  flex-direction:row;
+  display: flex;
+}
 .item-Box {
     width: 400px;
     padding: 50px;
     margin: 20px;
     color:black;
-    background-image: linear-gradient(red, yellow);
-    border: 1px black solid;
+    /*background-image: linear-gradient(red, yellow);
+    border: 1px black solid;*/
+    background-color: gray;
     border-radius: 25px;
+    
   }
+
+.failure{
+  background-color: red;
+}
+
+.item-Box-text{
+  text-align: center;
+}

@@ -20,7 +20,7 @@ app.get('/',async(req,res)=>{
    .then(length=>{
        len=length;
    })
-    res.render('admin/admin',{length:len});
+    res.render('admin/adminHome',{length:len});
 })
 
 app.get('/home',(req,res)=>{

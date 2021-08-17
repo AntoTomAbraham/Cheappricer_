@@ -1,17 +1,18 @@
 <%- include("adminHeader") -%>
-    <div>
-    <div class="col-md-12">
-        <div class="flex-container">
-            <div class="item-Box">
-                <h1>No of products :<%= length %></h1>
-            </div>
-          </div> 
-    </div>
-    <div class="col-md-12">
-        <div class="flex-container">
+        <h4>Current Statistics</h4>
+        <div>
+            <div class="flex-container flex">
+                <div class="item-Box">
+                    <h1 class="item-Box-text">Products in DB <br>📦<%= length %></h1>
+                </div>
+                <div class="item-Box">
+                    <h1 class="item-Box-text">Prices updated on ⏲️</h1>
+                </div>
+                <div class="item-Box failure">
+                    <h1 class="item-Box-text">Track Failures<br>❌0</h1>
+                </div>
+            </div> 
            
-          </div> 
-    </div>
-</div>   
-</body>
+        </div>   
+    </body>
 </html>
