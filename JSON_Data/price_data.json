@@ -93,7 +93,7 @@
         },
         "17-08-2021": {
             "amazon_india": 13999.0,
-            "flipkart": 0,
+            "flipkart": 15419.0,
             "rel_digi": -1,
             "croma": 14999.0,
             "dell_india_pc": -1
@@ -365,13 +365,13 @@
             "amazon_india": -1,
             "flipkart": 5991.0,
             "rel_digi": 5499.0,
-            "croma": 4999.0,
+            "croma": null,
             "dell_india_pc": -1
         }
     },
     "11": {
         "17-08-2021": {
-            "amazon_india": 68680.0,
+            "amazon_india": 68590.0,
             "flipkart": 70899.0,
             "rel_digi": 87999.0,
             "croma": -1,
