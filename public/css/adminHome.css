@@ -1,9 +1,9 @@
 .item-Box {
-    width: 200px;
+    width: 400px;
     padding: 50px;
     margin: 20px;
     color:black;
-    background-color:blueviolet;
+    background-image: linear-gradient(red, yellow);
     border: 1px black solid;
     border-radius: 25px;
   }
