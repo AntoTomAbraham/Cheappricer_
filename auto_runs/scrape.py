@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-import requests,json,time
+import requests,json,time,math
 from requests_html import HTMLSession
 from datetime import datetime
 
@@ -70,7 +70,11 @@ def croma(url):
         price=price[0].text
         price=price.split(",")
         price="".join(price)
-        return float(price)
+        x=float(price)
+        if(math.isnan(x)==True):
+            croma(url);
+        else:
+            return x
     except:
         return 0
         print("Price Unavailable --CROMA")

@@ -15,7 +15,12 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 
 app.get('/',(req,res)=>{
-    res.render('admin')
+//     let len;
+//     await Product.find().count()
+//    .then(length=>{
+//        len=length;
+//    })
+    res.render('admin/adminHome');
 })
 
 
