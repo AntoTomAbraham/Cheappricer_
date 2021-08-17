@@ -30,5 +30,37 @@
     "rel_digi": "",
     "croma": "",
     "dell_pc": ""
+  },
+  "5": {
+    "p_name": "OnePlus-Nord-CE-5G-8GB-RAM-128GB-Storage",
+    "amazon_in": "https://www.amazon.in/OnePlus-Nord-Charcoal-128GB-Storage/dp/B09576CYNP/ref=sr_1_1?dchild=1&keywords=oneplus&qid=1629175109&sr=8-1",
+    "flipkart": "",
+    "rel_digi": "https://www.reliancedigital.in/oneplus-nord-ce-5g-128-gb-8-gb-ram-blue-void-smartphone/p/491996838",
+    "croma": "https://www.croma.com/oneplus-nord-ce-5g-128gb-rom-8gb-ram-blue-void-/p/235153",
+    "dell_pc": ""
+  },
+  "6": {
+    "p_name": "OnePlus-Nord-CE-5G-(Charcoal-Ink-6GB-RAM-128GB-Storage)",
+    "amazon_in": "https://www.amazon.in/OnePlus-Nord-Charcoal-128GB-Storage/dp/B095735P11/ref=sr_1_2?dchild=1&keywords=oneplus&qid=1629175109&sr=8-2",
+    "flipkart": "",
+    "rel_digi": "https://www.reliancedigital.in/oneplus-nord-ce-5g-128-gb-6-gb-ram-charcoal-ink-smartphone/p/491996835",
+    "croma": "",
+    "dell_pc": ""
+  },
+  "7": {
+    "p_name": "OnePlus-Nord-CE-5G-12GB-RAM-256GB-Storage",
+    "amazon_in": "https://www.amazon.in/OnePlus-Nord-Charcoal-256GB-Storage/dp/B09575YG72/ref=sr_1_7?dchild=1&keywords=oneplus&qid=1629175109&sr=8-7",
+    "flipkart": "",
+    "rel_digi": "https://www.reliancedigital.in/oneplus-nord-ce-5g-256-gb-12-gb-ram-silver-ray-smartphone/p/491996840",
+    "croma": "https://www.croma.com/oneplus-nord-ce-5g-256gb-rom-12gb-ram-silver-ray-/p/235155",
+    "dell_pc": ""
+  },
+  "8": {
+    "p_name": "OnePlus-9R-5G-(Lake-Blue-8GB-RAM-128GB-Storage)",
+    "amazon_in": "https://www.amazon.in/Test-Exclusive_2020_1180-Multi-3GB-Storage/dp/B089MT34QL/ref=sr_1_11?dchild=1&keywords=oneplus&qid=1629178290&sr=8-11",
+    "flipkart": "",
+    "rel_digi": "https://www.reliancedigital.in/oneplus-9r-128-gb-8-gb-ram-lake-blue-smartphone/p/491996354",
+    "croma": "https://www.croma.com/oneplus-9r-128gb-rom-8gb-ram-le2101-lake-blue-/p/233912",
+    "dell_pc": ""
   }
 }

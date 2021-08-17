@@ -26,5 +26,33 @@
     "rel_digi": "",
     "croma": "",
     "dell-pc": ""
+  },
+  "5": {
+    "amazon_in": "https://amzn.to/2VSSCh7",
+    "flipkart": "",
+    "rel_digi": "https://www.reliancedigital.in/oneplus-nord-ce-5g-128-gb-8-gb-ram-blue-void-smartphone/p/491996838",
+    "croma": "https://ekaro.in/enkr20210817s4226738",
+    "dell-pc": ""
+  },
+  "6": {
+    "amazon_in": "https://amzn.to/37Vo8wZ",
+    "flipkart": "",
+    "rel_digi": "https://www.reliancedigital.in/oneplus-nord-ce-5g-128-gb-6-gb-ram-charcoal-ink-smartphone/p/491996835",
+    "croma": "",
+    "dell-pc": ""
+  },
+  "7": {
+    "amazon_in": "https://amzn.to/3k2OSkW",
+    "flipkart": "",
+    "rel_digi": "https://www.reliancedigital.in/oneplus-nord-ce-5g-256-gb-12-gb-ram-silver-ray-smartphone/p/491996840",
+    "croma": "https://ekaro.in/enkr20210817s4227178",
+    "dell-pc": ""
+  },
+  "8": {
+    "amazon_in": "https://amzn.to/3yTmjMV",
+    "flipkart": "",
+    "rel_digi": "https://www.reliancedigital.in/oneplus-9r-128-gb-8-gb-ram-lake-blue-smartphone/p/491996354",
+    "croma": "https://ekaro.in/enkr20210817s4227303",
+    "dell-pc": ""
   }
 }
