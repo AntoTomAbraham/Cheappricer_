@@ -1,6 +1,5 @@
 var express = require('express')
 var router = express.Router()
-var cmd=require('node-cmd');
 const fs = require("fs");
 const Product=require('../model/product')
 const bodyParser = require('body-parser')
@@ -129,7 +128,6 @@ app.post('/create',async (req,res)=>{
                 console.log("Saved")
             }  
     })
-    const syncDir=cmd.runSync('git add . && git commit -m "data_change" && git push -u origin main'); //running in cmd
 
 })
 
