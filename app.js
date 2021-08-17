@@ -11,15 +11,17 @@ app.use(express.static("public"));
 
 
 app.get("/",(req,res)=>{
-    return res.json("haiii")
+    res.render("product/home")
 })
 
 
 
 const adminRoutes=require('./routes/admin')
+const authRoutes=require('./routes/auth')
+const productRoutes=require('./routes/products')
 app.use('/admin',adminRoutes)
-
-
+app.use('/auth',authRoutes)
+app.use('/product',productRoutes)
 
 mongoose.connect(
     "mongodb+srv://CheapPricer:Cheappricer@_2021@cluster0.ivs2l.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
