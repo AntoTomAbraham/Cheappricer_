@@ -4,17 +4,36 @@ const fs = require("fs");
 const Product=require('../model/product')
 const bodyParser = require('body-parser')
 router.use(bodyParser.json())
-
+var jwt = require('jsonwebtoken');
+var cookieParser = require('cookie-parser')
 
 // require("dotenv").config()
 
 
 const app=express();
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(cookieParser())
 
+const requireAuth=(req,res,next)=>{
+    const token=req.cookies.jwt;
+    if(token){
+        jwt.verify(token,"shshshshshsh",(err,result)=>{
+            if(err){
+                res.redirect('/admin') 
+            }else{
+                next();
+            }
+        })
+    }else{
+        res.redirect('/admin')
+    }
+}
 
+app.get('/',(req,res)=>{
+    res.render('admin/adminAuth')
+})
 
-app.get('/',async(req,res)=>{
+app.get('/dashBoard',requireAuth,async(req,res)=>{
     let len;
     await Product.find().count()
    .then(length=>{
@@ -23,21 +42,9 @@ app.get('/',async(req,res)=>{
     res.render('admin/adminHome',{length:len});
 })
 
-app.get('/home',(req,res)=>{
+app.get('/dashBoard/additems',(req,res)=>{
     res.render('admin/admin');
 })
-
-app.post('/signin',(req,res)=>{
-    const {email, password}=req.body;
-    if(email== "admin@cheappricer.in" && password=="kochilive@_2021"){
-        return res.status(200).json({message:"signin"})
-        
-    }else{
-        return res.status(200).json({message:"signin failed"}) 
-    }
-
-})
-
 
 
 
@@ -167,6 +174,25 @@ app.get('/Pricejson',(req,res)=>{
     
 })
 
+app.post('/login', (req,res)=>{
+    console.log("enterd into signin")
+    const {email, password}=req.body;
+    if(email== "admin@cheappricer.in" && password == "kochilive@_2021"){
+        const token=jwt.sign({
+            email:email
+        },"shshshshshsh",
+        {
+            expiresIn:"1h"
+        },
+        );
+        res.cookie('jwt',token,{httpOnly:true,maxAge:24000000000})
+        res.redirect('/admin/dashBoard')
+    }else{
+        res.redirect('/admin')
+       
+    }
+
+})
 
 
 
