@@ -14,15 +14,18 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 
 
-app.get('/',(req,res)=>{
-//     let len;
-//     await Product.find().count()
-//    .then(length=>{
-//        len=length;
-//    })
-    res.render('admin/adminHome');
+app.get('/',async(req,res)=>{
+    let len;
+    await Product.find().count()
+   .then(length=>{
+       len=length;
+   })
+    res.render('admin/adminHome',{length:len});
 })
 
+app.get('/home',(req,res)=>{
+    res.render('admin/admin');
+})
 
 app.post('/signin',(req,res)=>{
     const {email, password}=req.body;
