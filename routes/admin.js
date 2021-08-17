@@ -119,12 +119,14 @@ app.post('/create',async (req,res)=>{
    product.save((err,product)=>{
        if(err){
            console.log(err)
-                res.status(400).json({
-                    error:"Error saving"
-                })
+           res.redirect('/admin')
+                // res.status(400).json({
+                //     error:"Error saving"
+                // })
         }
         else{
-                res.status(200).json(product)
+                res.redirect('/admin')
+                // res.status(200).json(product)
                 console.log("Saved")
             }  
     })
