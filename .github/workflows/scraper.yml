@@ -2,7 +2,7 @@ name: scrap-price-data
 
 on:
   schedule:
-    - cron: '00 4,10 * * *'   #runs @4:00am & @10:00 UTC everyday [09:30am & 03:30pm IST]   #cron set using: https://crontab.guru/ #timeconv. converter: https://savvytime.com/converter/utc-to-ist 
+    - cron: '30,0 3,10 * * *'   #runs @3:30am & @10:00 UTC everyday [09:00am & 03:30pm IST]   #cron set using: https://crontab.guru/ #timeconv. converter: https://savvytime.com/converter/utc-to-ist 
   workflow_dispatch:
 
 jobs:
