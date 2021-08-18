@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
 
       - name: checkout repo content
@@ -16,7 +16,7 @@ jobs:
       - name: setup python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.6.7' # install the python version needed
+          python-version: '3.x' # install the python version needed
           
       - name: install python packages
         run: |
