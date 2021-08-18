@@ -14,6 +14,7 @@ const app=express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser())
 
+//Middleware for making protected route
 const requireAuth=(req,res,next)=>{
     const token=req.cookies.jwt;
     if(token){
@@ -33,6 +34,12 @@ app.get('/',(req,res)=>{
     res.render('admin/adminAuth')
 })
 
+app.get('/signout',(req,res)=>{
+    res.clearCookie("jwt");
+    res.redirect('/admin')
+})
+
+//requireAuth is the middleware to make route protected
 app.get('/dashBoard',requireAuth,async(req,res)=>{
     let len;
     await Product.find().count()
@@ -42,7 +49,8 @@ app.get('/dashBoard',requireAuth,async(req,res)=>{
     res.render('admin/adminHome',{length:len});
 })
 
-app.get('/dashBoard/additems',(req,res)=>{
+//requireAuth is the middleware to make route protected
+app.get('/dashBoard/additems',requireAuth,(req,res)=>{
     res.render('admin/admin');
 })
 
@@ -174,6 +182,7 @@ app.get('/Pricejson',(req,res)=>{
     
 })
 
+//Creating token and saving it to Cookie
 app.post('/login', (req,res)=>{
     console.log("enterd into signin")
     const {email, password}=req.body;
