@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import requests,json,time,math
 from requests_html import HTMLSession
 from datetime import datetime
+from scrapingant_client import ScrapingAntClient
 
 headers = { 
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', 
@@ -11,7 +12,8 @@ headers = {
     'DNT' : '1', # Do Not Track Request Header 
     'Connection' : 'close'
 }
-
+#ScrapingAnt API
+client = ScrapingAntClient(token='6c5f48cb84d547bd919b47d1c2a07c83')
 
 
 # ALL RETURNING PRICES ARE IN FLOAT FORMAT
@@ -26,11 +28,13 @@ def amazon_india(url):
     try:
         time.sleep(3)
         try:
-            page=requests.get(url,headers=headers)
+            #page=requests.get(url,headers=headers)
+            page = client.general_request(url)
             soup=BeautifulSoup(page.content,"html.parser")
             price=soup.find(class_="a-size-medium a-color-price priceBlockDealPriceString").text
         except:
-            page=requests.get(url,headers=headers)
+            #page=requests.get(url,headers=headers)
+            page = client.general_request(url)
             soup=BeautifulSoup(page.content,"html.parser")
             price=soup.find(class_="a-size-medium a-color-price priceBlockBuyingPriceString").text
         price=price[1:]
