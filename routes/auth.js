@@ -1,8 +1,7 @@
 const express = require('express')
 const User=require('../model/user')
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt-nodejs');
 const bodyParser = require('body-parser')
-
 
 const app=express();
 app.use(bodyParser.urlencoded({extended: true}));
@@ -20,7 +19,7 @@ app.get('/signup',(req,res)=>{
 app.post('/signup',(req,res)=>{
     const {firstname,lastname,email, password}=req.body;
     console.log(req.body+"req.body");
-    bcrypt.hash(req.body.password,10,function(err,hash){
+    bcrypt.hash(req.body.password,null,null, function (err,hash){
         if(err){
             console.log(err)
             return res.status(500).json({error:err})
@@ -33,6 +32,7 @@ app.post('/signup',(req,res)=>{
             })
             user.save((err,user)=>{
                 if(err){
+                    console.log(err)
                     return res.status(400).json({
                         err:"NOT able to save user in DB"
                     })
