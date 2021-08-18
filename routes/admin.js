@@ -189,7 +189,7 @@ app.post('/login', (req,res)=>{
         res.redirect('/admin/dashBoard')
     }else{
         res.redirect('/admin')
-       
+      
     }
 
 })
