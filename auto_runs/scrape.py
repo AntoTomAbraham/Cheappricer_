@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-import requests,json,time,math
+import requests,json,time,math,random
 from requests_html import HTMLSession
 from datetime import datetime
 from scrapingant_client import ScrapingAntClient
@@ -12,8 +12,11 @@ headers = {
     'DNT' : '1', # Do Not Track Request Header 
     'Connection' : 'close'
 }
-#ScrapingAnt API
-client = ScrapingAntClient(token='6c5f48cb84d547bd919b47d1c2a07c83')
+#ScrapingAnt 
+
+api=["6c5f48cb84d547bd919b47d1c2a07c83","8bc22ffde48a4ca580c17c0e08f1aa06","a85797bb968b4ac09465c211cd1a0316","544254820d31456f94d480390a8468fc","fcf34ccf1ad0455ba3b16c844009edd0","424f238f608b4fa5aba61633b89a12bd"]
+
+client = ScrapingAntClient(token=api[random.randint(0,len(api)-1)])
 
 
 # ALL RETURNING PRICES ARE IN FLOAT FORMAT
