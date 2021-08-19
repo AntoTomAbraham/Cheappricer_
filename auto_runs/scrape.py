@@ -1,7 +1,8 @@
 from bs4 import BeautifulSoup
-import requests,json,time,math,random
+import requests,json,time,math,random,os
 from requests_html import HTMLSession
 from datetime import datetime
+from dotenv import load_dotenv,find_dotenv,set_key
 from scrapingant_client import ScrapingAntClient
 
 headers = { 
@@ -12,8 +13,8 @@ headers = {
     'DNT' : '1', # Do Not Track Request Header 
     'Connection' : 'close'
 }
-#ScrapingAnt 
 
+#ScrapingAnt 
 api=["6c5f48cb84d547bd919b47d1c2a07c83",
     "8bc22ffde48a4ca580c17c0e08f1aa06",
     "a85797bb968b4ac09465c211cd1a0316",
@@ -25,19 +26,29 @@ api=["6c5f48cb84d547bd919b47d1c2a07c83",
     "2227f6b9c0c14b03b6b4bc4626bf03fa",
     "d8904e15572c4c0d8e55c4699afef215",
     "1b1b9a94e5e94265a8a31614b4f2c58c",
-    "616fbfeffed146f0af10843360a7e114"
+    "616fbfeffed146f0af10843360a7e114",
+    "0e55b0dc4682490580199b1ebe8b69f1",
+    "68e064407dc540a488b44743b2308852",
+    "5f41628cee464b1ca69e98617ab65971"
 ]
 
 client = ScrapingAntClient(token=api[random.randint(0,len(api)-1)])
-
+now = datetime.now()
 
 # ALL RETURNING PRICES ARE IN FLOAT FORMAT
 
 def get_date():
-    now = datetime.now()
     dt_string = now.strftime("%d-%m-%Y")
     return dt_string
 
+def date_update():
+    dotenv_file =find_dotenv()
+    load_dotenv()
+    hour=str(int(now.strftime("%H"))+5)
+    minute=str(int(now.strftime("%M"))+30)
+    date = now.strftime("%d-%m-%Y")
+    os.environ['PRICE_UPD_TIME']=date+" "+hour+":"+minute+" IST"
+    set_key(dotenv_file, "PRICE_UPD_TIME", os.environ["PRICE_UPD_TIME"])
 
 def amazon_india(url):
     try:
@@ -227,3 +238,4 @@ for i in range(0,len(p_data)):
     prd_id=int(prd_id)
     prd_id=prd_id+1
     prd_id=str(prd_id)
+date_update()
