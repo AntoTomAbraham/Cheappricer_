@@ -25,7 +25,7 @@ app.use('/product',productRoutes)
 
 mongoose.connect(
     "mongodb+srv://CheapPricer:Cheappricer@_2021@cluster0.ivs2l.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
- {
+{
     useNewUrlParser: true,
     useUnifiedTopology:true,
     useCreateIndex:true
