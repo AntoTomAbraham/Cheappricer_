@@ -1,19 +1,23 @@
 <%- include("adminHeader") -%>
-        <h4 style="padding-left: 20px;padding-top: 7px;padding-bottom: 7px;background-color:green;max-width:100%;color:white">Time: <span id="txt"></span></h4>
+        <!--<h4 style="padding-left: 20px;padding-top: 7px;padding-bottom: 7px;background-color:green;max-width:100%;color:white">Time: <span id="txt"></span></h4> -->
+        <div class="top-bar">
+            <h5 class="Time">time: <span id="time"></span> || Last price fetch 🕒: <%= time %></h5>
+        </div>
         <div>
             <div class="flex-container flex">
                 <div class="item-Box">
                     <h1 class="item-Box-text">Products in DB <br>📦<%= length %></h1>
                 </div>
-                <div class="item-Box">
-                    <h1 class="item-Box-text">Data-fetched:<br><%= time %></h1>
-                </div>
                 <div class="item-Box failure">
-                    <h1 class="item-Box-text">Track Failures<br>❌<span class=""><%= failures %></span></h1>
+                    <h1 class="item-Box-text">Track Failures<br>❌<span class="failure-val"><%= failures %></span></h1>
+                </div>
+                <div class="item-Box drop">
+                    <h1 class="item-Box-text">Drops created<br>⬇️<span class="drop-val">0</span></h1>
                 </div>
             </div> 
            
         </div>  
+        <script src="/JS/admin.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     </body>
 </html>
