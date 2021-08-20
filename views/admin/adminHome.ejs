@@ -6,13 +6,14 @@
                     <h1 class="item-Box-text">Products in DB <br>📦<%= length %></h1>
                 </div>
                 <div class="item-Box">
-                    <h1 class="item-Box-text">Prices updated on ⏲️</h1>
+                    <h1 class="item-Box-text">Data-fetched:<br><%= time %></h1>
                 </div>
                 <div class="item-Box failure">
-                    <h1 class="item-Box-text">Track Failures<br>❌<span class="failure-val">0</span></h1>
+                    <h1 class="item-Box-text">Track Failures<br>❌<span class=""><%= failures %></span></h1>
                 </div>
             </div> 
            
-        </div>   
+        </div>  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     </body>
 </html>

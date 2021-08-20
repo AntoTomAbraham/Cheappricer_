@@ -4,6 +4,8 @@ from requests_html import HTMLSession
 from datetime import datetime
 from dotenv import load_dotenv,find_dotenv,set_key
 from scrapingant_client import ScrapingAntClient
+from pytz import timezone
+
 
 headers = { 
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', 
@@ -34,6 +36,8 @@ api=["6c5f48cb84d547bd919b47d1c2a07c83",
 
 client = ScrapingAntClient(token=api[random.randint(0,len(api)-1)])
 now = datetime.now()
+dotenv_file =find_dotenv()
+load_dotenv()
 
 # ALL RETURNING PRICES ARE IN FLOAT FORMAT
 
@@ -42,12 +46,10 @@ def get_date():
     return dt_string
 
 def date_update():
-    dotenv_file =find_dotenv()
-    load_dotenv()
-    hour=str(int(now.strftime("%H"))+5)
-    minute=str(int(now.strftime("%M"))+30)
-    date = now.strftime("%d-%m-%Y")
-    os.environ['PRICE_UPD_TIME']=date+" "+hour+":"+minute+" IST"
+    format = "%d-%m %H:%M %Z"
+    now_utc = datetime.now(timezone('UTC'))
+    now_asia = now_utc.astimezone(timezone('Asia/Kolkata'))
+    os.environ['PRICE_UPD_TIME']=now_asia.strftime(format)
     set_key(dotenv_file, "PRICE_UPD_TIME", os.environ["PRICE_UPD_TIME"])
 
 def amazon_india(url):
@@ -72,9 +74,6 @@ def amazon_india(url):
         print("Price Unavailable --AMZIN")
 
 
-            
-
-    
 
 def flipkart(url):
     page=requests.get(url,headers=headers)
@@ -150,7 +149,7 @@ def mail_notify(url,site,p_name):
 
 
 prd_id="1"
-
+failures=0 #setting failures to 0!
 #getting data & running scrapping funcs from product_data.json
 date=get_date() #getting date
 
@@ -169,6 +168,7 @@ for i in range(0,len(p_data)):
                 else:
                     amazon_india_price=amazon_india(p_data[prd_id][site])
                     if(amazon_india_price==0):
+                        failures+=1
                         mail_notify(p_data[prd_id][site],"Amazon_India",p_data[prd_id]["p_name"])
 
             elif(site=="flipkart"):
@@ -177,6 +177,7 @@ for i in range(0,len(p_data)):
                 else:
                     flipkart_price=flipkart(p_data[prd_id][site])
                     if(flipkart_price==0):
+                        failures+=1
                         mail_notify(p_data[prd_id][site],"Flipkart",p_data[prd_id]["p_name"])
 
             elif(site=="rel_digi"):
@@ -185,6 +186,7 @@ for i in range(0,len(p_data)):
                 else:
                     rel_digital_price=rel_digital(p_data[prd_id][site])
                     if(rel_digital_price==0):
+                        failures+=1
                         mail_notify(p_data[prd_id][site],"Reliance_Digital",p_data[prd_id]["p_name"])
 
             elif(site=="croma"):
@@ -193,6 +195,7 @@ for i in range(0,len(p_data)):
                 else:
                     croma_price=croma(p_data[prd_id][site])
                     if(croma_price==0):
+                        failures+=1
                         mail_notify(p_data[prd_id][site],"croma",p_data[prd_id]["p_name"])
                     
             elif(site=="dell_pc"):
@@ -201,6 +204,7 @@ for i in range(0,len(p_data)):
                 else:
                     dell_india_pc_price=dell_india_pc(p_data[prd_id][site])
                     if(dell_india_pc_price==0):
+                        failures+=1
                         mail_notify(p_data[prd_id][site],"Dell_India_pc",p_data[prd_id]["p_name"])
             else:
                 pass
@@ -239,3 +243,5 @@ for i in range(0,len(p_data)):
     prd_id=prd_id+1
     prd_id=str(prd_id)
 date_update()
+os.environ['FAILURES']=str(failures)
+set_key(dotenv_file, "FAILURES", os.environ["FAILURES"]) #saving failures

@@ -14,6 +14,6 @@ function checkTime(i) {
     return i;
 }
 
-var value=document.getElementsByClassName("failure-val").textContent;
 
-console.log(value)
+
+alert($(".failure-val").text());

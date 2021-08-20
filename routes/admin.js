@@ -6,6 +6,8 @@ const bodyParser = require('body-parser')
 router.use(bodyParser.json())
 var jwt = require('jsonwebtoken');
 var cookieParser = require('cookie-parser')
+const dotenv = require('dotenv');
+dotenv.config();
 
 // require("dotenv").config()
 
@@ -46,7 +48,9 @@ app.get('/dashBoard',requireAuth,async(req,res)=>{
    .then(length=>{
        len=length;
    })
-    res.render('admin/adminHome',{length:len});
+   var time=`${process.env.PRICE_UPD_TIME}`;
+   var failures=`${process.env.FAILURES}`;
+    res.render('admin/adminHome',{length:len,time:time,failures:failures});
 })
 
 //requireAuth is the middleware to make route protected
@@ -113,7 +117,7 @@ app.post('/create',async (req,res)=>{
         console.log("New data added");
     });
     
-
+    
     var fileAff=fs.readFileSync('JSON_Data/affiliate_data.json'); //reading JSON --affiliate_data.json
     var objDataAff=JSON.parse(fileAff); //PARSING
     objDataAff[arrId]={ //New data object
