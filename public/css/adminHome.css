@@ -46,6 +46,16 @@ body{
     
   }
 
+  @media(max-width:1288px){
+    .item-Box-text{
+      font-size: 25px;
+    }
+    .item-Box{
+      width: 300px;
+      
+    }
+  }
+
 .failure{
   background-color: red;
 }

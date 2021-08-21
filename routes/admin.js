@@ -56,7 +56,10 @@ app.get('/dashBoard',requireAuth,async(req,res)=>{
 //requireAuth is the middleware to make route protected
 app.get('/dashBoard/additems',requireAuth,(req,res)=>{
     res.render('admin/admin');
-})
+});
+app.get("/dashBoard/dbProducts",requireAuth,(req,res)=>{
+    res.send("Products")
+});
 
 
 

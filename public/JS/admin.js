@@ -14,6 +14,9 @@ function checkTime(i) {
     return i;
 }
 
+$(".products").click(()=>{
+    window.location.href = "dashBoard/dbProducts";
+})
 
 var failure_val=$(".failure-val").text();
 if(parseInt(failure_val)>0){
