@@ -45,35 +45,35 @@ def get_date():
     dt_string = now.strftime("%d-%m-%Y")
     return dt_string
 
-def date_update():
+def date_update(failures):
     format = "%d-%m %H:%M %Z"
     now_utc = datetime.now(timezone('UTC'))
     now_asia = now_utc.astimezone(timezone('Asia/Kolkata'))
     os.environ['PRICE_UPD_TIME']=now_asia.strftime(format)
     set_key(dotenv_file, "PRICE_UPD_TIME", os.environ["PRICE_UPD_TIME"])
+    os.environ['FAILURES']=str(failures)
+    set_key(dotenv_file, "FAILURES", os.environ["FAILURES"]) #saving failures
 
 def amazon_india(url):
+    page = client.general_request(url)
+    soup=BeautifulSoup(page.content,"html.parser")
     try:
-        time.sleep(3)
         try:
-            #page=requests.get(url,headers=headers)
-            page = client.general_request(url)
-            soup=BeautifulSoup(page.content,"html.parser")
             price=soup.find(class_="a-size-medium a-color-price priceBlockDealPriceString").text
+            price=price[1:]
+            price=price.split(",");
+            price="".join(price)
+            return float(price)
         except:
-            #page=requests.get(url,headers=headers)
-            page = client.general_request(url)
-            soup=BeautifulSoup(page.content,"html.parser")
             price=soup.find(class_="a-size-medium a-color-price priceBlockBuyingPriceString").text
-        price=price[1:]
-        price=price.split(",");
-        price="".join(price)
-        return float(price)
+            price=price[1:]
+            price=price.split(",");
+            price="".join(price)
+            return float(price)
     except:
-        return 0
         print("Price Unavailable --AMZIN")
-
-
+        return 0
+    
 
 def flipkart(url):
     page=requests.get(url,headers=headers)
@@ -85,8 +85,8 @@ def flipkart(url):
         price="".join(price)
         return float(price)
     except:
-        return 0
         print("Price Unavailable --FLP")
+        return 0
 
 
 def croma(url):
@@ -105,8 +105,8 @@ def croma(url):
         else:
             return x
     except:
-        return 0
         print("Price Unavailable --CROMA")
+        return 0
     
 
 
@@ -121,8 +121,8 @@ def rel_digital(url):
         price="".join(price)
         return float(price)
     except:
-        return 0
         print("Price Unavailable --REL_DIGI")
+        return 0
 
 def dell_india_pc(url): #only for laptops & desktops
     page=requests.get(url,headers=headers)
@@ -136,8 +136,8 @@ def dell_india_pc(url): #only for laptops & desktops
         price="".join(price)
         return float(price)
     except:
-        return 0
         print("Price Unavailable --DELL-PC")
+        return 0
 
 
 #mailing
@@ -169,7 +169,7 @@ for i in range(0,len(p_data)):
                     amazon_india_price=amazon_india(p_data[prd_id][site])
                     if(amazon_india_price==0):
                         failures+=1
-                        mail_notify(p_data[prd_id][site],"Amazon_India",p_data[prd_id]["p_name"])
+                        mail_notify(p_data[prd_id][site],"Amazon_India",prd_id+": "+p_data[prd_id]["p_name"])
 
             elif(site=="flipkart"):
                 if(p_data[prd_id][site]==""):
@@ -228,7 +228,6 @@ for i in range(0,len(p_data)):
             try:
                 pr_data[prd_id].update(price_data)
 
-
             except:
                 pr_data[prd_id]=price_data  #for new ids
             
@@ -242,6 +241,4 @@ for i in range(0,len(p_data)):
     prd_id=int(prd_id)
     prd_id=prd_id+1
     prd_id=str(prd_id)
-date_update()
-os.environ['FAILURES']=str(failures)
-set_key(dotenv_file, "FAILURES", os.environ["FAILURES"]) #saving failures
+date_update(failures)
