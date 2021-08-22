@@ -58,7 +58,16 @@ app.get('/dashBoard/additems',requireAuth,(req,res)=>{
     res.render('admin/admin');
 });
 app.get("/dashBoard/dbProducts",requireAuth,(req,res)=>{
-    res.send("Products")
+    Product.find({},(err,data)=>{
+        if(err){
+            res.send(err);
+        }
+        else{
+            //res.send(data[0]);
+            res.render("admin/table",{data:data})
+        }
+    })
+    //res.send("Products")
 });
 
 
