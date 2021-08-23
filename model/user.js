@@ -6,7 +6,7 @@ const userSchema=new mongoose.Schema({
         trim:true,
         required:true,
     },
-    Lastname:{
+    lastname:{
         type:String,
         trim:true,
     },
@@ -20,7 +20,11 @@ const userSchema=new mongoose.Schema({
         type:String,
         trim:true,
         minLength:8,
-    } 
+    },
+    isConfirmed:{
+        type:Boolean,
+        default:false
+    }
 },{timestamps:true})
 
 module.exports=mongoose.model("User",userSchema)

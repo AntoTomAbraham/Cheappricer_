@@ -2,34 +2,104 @@ const express = require('express')
 const User=require('../model/user')
 const bcrypt = require('bcrypt-nodejs');
 const bodyParser = require('body-parser')
+const {check,validationResult}=require('express-validator')
+var validator = require("email-validator");
+var _ = require('lodash');
+var jwt = require('jsonwebtoken');
+const nodemailer=require('nodemailer')
 
 const app=express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json())
 
+//middleware to check we are authenticated
+const requireAuth=(req,res,next)=>{
+    const token=req.cookies.jwt;
+    if(token){
+        jwt.verify(token,"shshshshshsh",(err,result)=>{
+            if(err){
+                res.redirect('/auth/login') 
+            }else{
+                next();
+            }
+        })
+    }else{
+        res.redirect('/auth/login')
+    }
+}
+
+//get route for login
 app.get('/login',(req,res)=>{
     res.render('auth/login')
 })
 
+//get route to signup
 app.get('/signup',(req,res)=>{
     res.render('auth/signup')
 })
 
-
-app.post('/signup',(req,res)=>{
+//post route for signup
+app.post('/signup',[
+    check('firstname')
+    .isEmpty()
+],(req,res)=> {
     const {firstname,lastname,email, password}=req.body;
-    console.log(req.body+"req.body");
-    bcrypt.hash(req.body.password,null,null, function (err,hash){
-        if(err){
-            console.log(err)
-            return res.status(500).json({error:err})
-        }else{
-            const user=new User({
+    const errors=validationResult(req)
+    if(errors.isEmpty()){
+        return res.json({err:"error is there"})
+    }
+    User.find({email:req.body.email})
+    .exec()
+    .then(user=>{
+        console.log(user.length+" user length")
+        if(user.length<=0){
+            console.log(req.body+"req.body");
+            //hashing password
+            bcrypt.hash(req.body.password,null,null, function (err,hash){
+            if(err){
+              console.log(err)
+              return res.status(500).json({error:err})
+            }else{
+                //generate secrete token
+                const token=jwt.sign({
+                    email:email
+                },"verification",
+                {
+                    expiresIn:"1h"
+                },
+                );
+                //sending mail to the user for verification
+                const linkk=`http://localhost:8000/auth/confirm/${email}/${token}`
+                var transport=nodemailer.createTransport(
+                    {
+                        service:'gmail',
+                        auth:{
+                            user:"cheappricer.auth@gmail.com",
+                            pass:"cheappricer@_2021"
+                        }
+                }
+                )
+                var mailOptions={
+                    from:'cheappricer.auth@gmail.com',
+                    to:email,
+                    subject:"Confirmation link",
+                    text:linkk,
+                    html: `<a>${linkk}</a>`
+                }
+                transport.sendMail(mailOptions,(err,info)=>{
+                    if(err){
+                        console.log(err)
+                    }else{
+                        console.log("done"+info.response)
+                    }
+                })
+                const user=new User({
                 firstname:req.body.firstname,
                 lastname:req.body.lastname,
                 email:req.body.email,
                 password:hash,
             })
+            //saving the user but isConfirmed:false
             user.save((err,user)=>{
                 if(err){
                     console.log(err)
@@ -40,12 +110,62 @@ app.post('/signup',(req,res)=>{
                 res.json({
                     msg:"saved"
                 })
+                // User.find({email:req.body.email})
+                // .exec()
+                // .then(user=>{
+                //     if(user.length<1){
+                //         res.json("user not found while user confirmation")
+                //     }else{
+                //         if(user.isConfirmed==true){
+                //             res.json("true")
+                //         }
+                //     }
+                // })     
             })
         }
     });
+        }
+        else{
+            res.json({
+                msg:"User already present"
+            })  
+        }
+    })
+    
 })
 
+//confirm mail URL
+app.get('/confirm/:email/:token',(req,res)=>{
+    const emaill=req.params.email;
+    const token=req.params.token;
+    const payload=jwt.verify(token,"verification")
+    if(payload == ''){
+        res.json('invalid payload')
+    }
+    console.log(payload.email+" email payload")
+    if(payload.email==emaill){
+        User.find({email:emaill})
+    .exec()
+    .then(user=>{
+        if(user.length<1){
+            res.json({
+                msg:"No user"
+            })  
+        }else{
+            res.json("entered to extend")
+            const object={
+                isConfirmed:true
+            }
+            user=_.extend(user,object)
+            
+        }
+  })
+}else{
+    res.json("wrong token & email")
+}  
+})
 
+//login route
 app.post('/login',(req,res)=>{
     console.log(req.body)
     User.find({email:req.body.email})
@@ -63,9 +183,139 @@ app.post('/login',(req,res)=>{
                     res.json({msg:"Failed"})
                 }
                 if(result){
+                    const token=jwt.sign({
+                        email:email
+                    },"shshshshshsh",
+                    {
+                        expiresIn:"1h"
+                    },
+                    );
+                    res.cookie('jwt',token,{httpOnly:true,maxAge:24000000000})
                     return res.json({msg:"successfull"})
                 }
             })
+    })
+})
+
+//get route for forgotpassword
+app.get('/forgotpassword',(req,res)=>{})
+
+//post route for forgotPassword
+app.post('/forgotPassword',(req,res)=>{
+    const {email}=req.body;
+    User.find({email:req.body.email})
+    .exec()
+    .then(user=>{
+        if(!user){
+            res.json("user not found")
+        }
+        else{
+            //sending link for reset password
+            const secret="shshsh" + user.password
+            const payload={
+                email:user.email,
+                firstname:user.firstname,
+            }
+            const token=jwt.sign(payload,secret,{expiresIn:'15m'})
+            const link=`http://localhost:8000/auth/resetPassword/${user[0].email}/${token}`
+            var transport=nodemailer.createTransport(
+                {
+                    service:'gmail',
+                    auth:{
+                        user:"cheappricer.auth@gmail.com",
+                        pass:"cheappricer@_2021"
+                    }
+            }
+            )
+            var mailOptions={
+                from:'cheappricer.auth@gmail.com',
+                to:email,
+                subject:"forgot link",
+                text:link,
+                html: `<a>${link}</a>`
+            }
+            transport.sendMail(mailOptions,(err,info)=>{
+                if(err){
+                    console.log(err)
+                }else{
+                    console.log("done"+info.response)
+                }
+            })
+            console.log(link)
+            res.json(link)
+        }
+    })
+})
+
+//reset link
+app.get('/resetPassword/:email/:token',(req,res,next)=>{
+    const {email,token}=req.params;
+    console.log(email);
+    console.log(token)
+    User.find({email:req.body.email})
+    .exec()
+    .then(user=>{
+        if(!user){
+            res.json("no user")
+        }else{
+            const secret="shshsh"+user.password;
+            try{
+                const payload=jwt.verify(token,secret)
+                console.log("success")
+                res.render()
+            }
+            catch(err){
+                console.log(err)
+            }
+        }
+    })
+})
+
+//reset link after typing password
+app.post('/resetpassword/:email/:token',(req,res,next)=>{
+    const {email,password}=req.params;
+    const {repassword,reconPassord}=req.body;
+    User.find({email:req.body.email})
+    .exec()
+    .then(user=>{
+        if(!user){
+            res.json("no user")
+        }else{
+            const secret="shshsh"+user.password;
+            try{
+                const payload=jwt.verify(token,"shshsh")
+                User.find({email:email})
+                .exec()
+                .then((user)=>{
+                    if(!user){
+                        res.json("no user found")
+                    }else{
+                        bcrypt.hash(req.body.repassword,null,null, function (err,hash){
+                            if(err){
+                              console.log(err)
+                              return res.status(500).json({error:err})
+                            }else{
+                                const obj={
+                                    password:hash
+                                }
+                                user=_.extend(user,obj)
+                                user.save((err,res)=>{
+                                    if(err){
+                                        res.json(err)
+                                    }else{
+                                        res.json(success)
+                                    }
+                                })
+                                res.json("updated")
+                            }
+                        })
+                    }
+                })
+            }
+            catch(err){
+                console.log(err)
+            }
+        }
     })
 })
 
