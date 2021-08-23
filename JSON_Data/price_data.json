@@ -404,7 +404,7 @@
             "dell_india_pc": -1
         },
         "23-08-2021": {
-            "amazon_india": 0,
+            "amazon_india": 14999.0,
             "flipkart": 16190.0,
             "rel_digi": 16499.0,
             "croma": -1,
@@ -785,7 +785,7 @@
             "amazon_india": -1,
             "flipkart": 5983.0,
             "rel_digi": 5499.0,
-            "croma": null,
+            "croma": 4999.0,
             "dell_india_pc": -1
         }
     },
@@ -833,8 +833,8 @@
             "dell_india_pc": -1
         },
         "23-08-2021": {
-            "amazon_india": 67650.0,
-            "flipkart": 67990.0,
+            "amazon_india": 68250.0,
+            "flipkart": 67490.0,
             "rel_digi": 87999.0,
             "croma": -1,
             "dell_india_pc": -1
