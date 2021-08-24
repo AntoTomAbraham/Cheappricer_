@@ -258,15 +258,48 @@ app.get('/resetPassword/:email/:token',(req,res,next)=>{
         }else{
             const secret="shshsh"+user.password;
             try{
+            jwt.verify(token,secret,(err,decoded)=>{
+                if(err){
+                    console.log(err)
+                    res.json(err)
+                }else{
                 const payload=jwt.verify(token,secret)
                 console.log("success")
                 res.render()
+                }
+            })
             }
             catch(err){
-                console.log(err)
+               console.log(err)
             }
         }
     })
+})
+
+app.post('/resetpassword',(req,res)=>{
+    const {email,password,repassword}=req.body;
+    if(password == repassword){
+        bcrypt.hash(req.body.repassword,null,null, function (err,hash){
+            if(err){
+              console.log(err)
+              return res.status(500).json({error:err})
+            }else{
+                const object={
+                    password:hash
+                }
+                User.findOneAndUpdate({email:email},object)
+                .then(user=>{
+                    if(user.length<1){
+                        res.json({
+                            msg:"No user"
+                        })  
+                    }else{
+                        res.json("entered to extend") 
+                    }
+              })
+            }
+        })
+    }
 })
 
 //reset link after typing password
@@ -285,7 +318,7 @@ app.post('/resetpassword/:email/:token',(req,res,next)=>{
             const object={
                 password:hash
             }
-            findOneAndUpdate({email:emaill},object)
+            User.findOneAndUpdate({email:email},object)
             .then(user=>{
                 if(user.length<1){
                     res.json({
@@ -347,7 +380,15 @@ app.post('/resetpassword/:email/:token',(req,res,next)=>{
     //     }
     // })
 })
+app.get('/googlelogin',(req,res)=>{
 
+})
 
 
 module.exports=app;
+
+//headers
+//<script src="https://apis.google.com/js/platform.js" async defer></script>
+//<meta name="google-signin-client_id" content="298046608597-tovb9uj457h1vfpr8i58f30gu9up8pqq.apps.googleusercontent.com">
+//button
+// <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>

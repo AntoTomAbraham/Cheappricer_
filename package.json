@@ -27,6 +27,7 @@
     "node-cmd": "^5.0.0",
     "nodemailer": "^6.6.3",
     "nodemon": "^2.0.12",
+    "passport": "^0.4.1",
     "salt": "^0.5.5"
   }
 }
