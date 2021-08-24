@@ -143,8 +143,11 @@ app.get('/confirm/:email/:token',(req,res)=>{
         res.json('invalid payload')
     }
     console.log(payload.email+" email payload")
+    const object={
+        isConfirmed:true
+    }
     if(payload.email==emaill){
-        User.find({email:emaill})
+    User.findOneAndUpdate({email:emaill},object)
     .exec()
     .then(user=>{
         if(user.length<1){
@@ -152,12 +155,7 @@ app.get('/confirm/:email/:token',(req,res)=>{
                 msg:"No user"
             })  
         }else{
-            res.json("entered to extend")
-            const object={
-                isConfirmed:true
-            }
-            user=_.extend(user,object)
-            
+            res.json("entered to extend") 
         }
   })
 }else{
@@ -252,7 +250,7 @@ app.get('/resetPassword/:email/:token',(req,res,next)=>{
     const {email,token}=req.params;
     console.log(email);
     console.log(token)
-    User.find({email:req.body.email})
+    User.find({email:email})
     .exec()
     .then(user=>{
         if(!user){
@@ -275,48 +273,81 @@ app.get('/resetPassword/:email/:token',(req,res,next)=>{
 app.post('/resetpassword/:email/:token',(req,res,next)=>{
     const {email,password}=req.params;
     const {repassword,reconPassord}=req.body;
-    User.find({email:req.body.email})
-    .exec()
-    .then(user=>{
-        if(!user){
-            res.json("no user")
+    //try
+    const secret="shshsh"+user.password;
+    const payload=jwt.verify(token,secret)
+    if(payload.email==email){
+    bcrypt.hash(req.body.repassword,null,null, function (err,hash){
+        if(err){
+          console.log(err)
+          return res.status(500).json({error:err})
         }else{
-            const secret="shshsh"+user.password;
-            try{
-                const payload=jwt.verify(token,"shshsh")
-                User.find({email:email})
-                .exec()
-                .then((user)=>{
-                    if(!user){
-                        res.json("no user found")
-                    }else{
-                        bcrypt.hash(req.body.repassword,null,null, function (err,hash){
-                            if(err){
-                              console.log(err)
-                              return res.status(500).json({error:err})
-                            }else{
-                                const obj={
-                                    password:hash
-                                }
-                                user=_.extend(user,obj)
-                                user.save((err,res)=>{
-                                    if(err){
-                                        res.json(err)
-                                    }else{
-                                        res.json(success)
-                                    }
-                                })
-                                res.json("updated")
-                            }
-                        })
-                    }
-                })
+            const object={
+                password:hash
             }
-            catch(err){
-                console.log(err)
-            }
+            findOneAndUpdate({email:emaill},object)
+            .then(user=>{
+                if(user.length<1){
+                    res.json({
+                        msg:"No user"
+                    })  
+                }else{
+                    res.json("entered to extend") 
+                }
+          })
         }
     })
+}else{
+    res.json('no user')
+}
+
+
+    ///main
+    // User.find({email:req.body.email})
+    // .exec()
+    // .then(user=>{
+    //     if(!user){
+    //         res.json("no user")
+    //     }else{
+    //         const secret="shshsh"+user.password;
+    //         try{
+    //             const payload=jwt.verify(token,"shshsh")
+    //             User.find({email:email})
+    //             .exec()
+    //             .then((user)=>{
+    //                 if(!user){
+    //                     res.json("no user found")
+    //                 }else{
+    //                     bcrypt.hash(req.body.repassword,null,null, function (err,hash){
+    //                         if(err){
+    //                           console.log(err)
+    //                           return res.status(500).json({error:err})
+    //                         }else{
+    //                             const obj={
+    //                                 password:hash
+    //                             }
+    //                             user=_.extend(user,obj)
+    //                             user.save((err,res)=>{
+    //                                 if(err){
+    //                                     res.json(err)
+    //                                 }else{
+    //                                     res.json(success)
+    //                                 }
+    //                             })
+    //                             res.json("updated")
+    //                         }
+    //                     })
+    //                     //ending bcrypt
+    //                 }
+    //             })
+    //         }
+    //         catch(err){
+    //             console.log(err)
+    //         }
+    //     }
+    // })
 })
+
+
 
 module.exports=app;
