@@ -7,26 +7,21 @@ var validator = require("email-validator");
 var _ = require('lodash');
 var jwt = require('jsonwebtoken');
 const nodemailer=require('nodemailer')
+var GoogleStrategy = require('passport-google-oauth20').Strategy;
+const Googleuser=require('../model/Googleuser')
+const passport=require('passport')
+const session=require('express-session')
 
 const app=express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json())
-
-//middleware to check we are authenticated
-const requireAuth=(req,res,next)=>{
-    const token=req.cookies.jwt;
-    if(token){
-        jwt.verify(token,"shshshshshsh",(err,result)=>{
-            if(err){
-                res.redirect('/auth/login') 
-            }else{
-                next();
-            }
-        })
-    }else{
-        res.redirect('/auth/login')
-    }
-}
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: false,
+}))
+app.use(passport.initialize())
+app.use(passport.session())
 
 //get route for login
 app.get('/login',(req,res)=>{
@@ -303,92 +298,129 @@ app.post('/resetpassword',(req,res)=>{
 })
 
 //reset link after typing password
-app.post('/resetpassword/:email/:token',(req,res,next)=>{
-    const {email,password}=req.params;
-    const {repassword,reconPassord}=req.body;
-    //try
-    const secret="shshsh"+user.password;
-    const payload=jwt.verify(token,secret)
-    if(payload.email==email){
-    bcrypt.hash(req.body.repassword,null,null, function (err,hash){
-        if(err){
-          console.log(err)
-          return res.status(500).json({error:err})
-        }else{
-            const object={
-                password:hash
-            }
-            User.findOneAndUpdate({email:email},object)
-            .then(user=>{
-                if(user.length<1){
-                    res.json({
-                        msg:"No user"
-                    })  
-                }else{
-                    res.json("entered to extend") 
-                }
-          })
-        }
-    })
-}else{
-    res.json('no user')
-}
+// app.post('/resetpassword/:email/:token',(req,res,next)=>{
+//     const {email,password}=req.params;
+//     const {repassword,reconPassord}=req.body;
+//     //try
+//     const secret="shshsh"+user.password;
+//     const payload=jwt.verify(token,secret)
+//     if(payload.email==email){
+//     bcrypt.hash(req.body.repassword,null,null, function (err,hash){
+//         if(err){
+//           console.log(err)
+//           return res.status(500).json({error:err})
+//         }else{
+//             const object={
+//                 password:hash
+//             }
+//             User.findOneAndUpdate({email:email},object)
+//             .then(user=>{
+//                 if(user.length<1){
+//                     res.json({
+//                         msg:"No user"
+//                     })  
+//                 }else{
+//                     res.json("entered to extend") 
+//                 }
+//           })
+//         }
+//     })
+// }else{
+//     res.json('no user')
+ //}
 
 
-    ///main
-    // User.find({email:req.body.email})
-    // .exec()
-    // .then(user=>{
-    //     if(!user){
-    //         res.json("no user")
-    //     }else{
-    //         const secret="shshsh"+user.password;
-    //         try{
-    //             const payload=jwt.verify(token,"shshsh")
-    //             User.find({email:email})
-    //             .exec()
-    //             .then((user)=>{
-    //                 if(!user){
-    //                     res.json("no user found")
-    //                 }else{
-    //                     bcrypt.hash(req.body.repassword,null,null, function (err,hash){
-    //                         if(err){
-    //                           console.log(err)
-    //                           return res.status(500).json({error:err})
-    //                         }else{
-    //                             const obj={
-    //                                 password:hash
-    //                             }
-    //                             user=_.extend(user,obj)
-    //                             user.save((err,res)=>{
-    //                                 if(err){
-    //                                     res.json(err)
-    //                                 }else{
-    //                                     res.json(success)
-    //                                 }
-    //                             })
-    //                             res.json("updated")
-    //                         }
-    //                     })
-    //                     //ending bcrypt
-    //                 }
-    //             })
-    //         }
-    //         catch(err){
-    //             console.log(err)
-    //         }
-    //     }
-    // })
+//     ///main
+//     // User.find({email:req.body.email})
+//     // .exec()
+//     // .then(user=>{
+//     //     if(!user){
+//     //         res.json("no user")
+//     //     }else{
+//     //         const secret="shshsh"+user.password;
+//     //         try{
+//     //             const payload=jwt.verify(token,"shshsh")
+//     //             User.find({email:email})
+//     //             .exec()
+//     //             .then((user)=>{
+//     //                 if(!user){
+//     //                     res.json("no user found")
+//     //                 }else{
+//     //                     bcrypt.hash(req.body.repassword,null,null, function (err,hash){
+//     //                         if(err){
+//     //                           console.log(err)
+//     //                           return res.status(500).json({error:err})
+//     //                         }else{
+//     //                             const obj={
+//     //                                 password:hash
+//     //                             }
+//     //                             user=_.extend(user,obj)
+//     //                             user.save((err,res)=>{
+//     //                                 if(err){
+//     //                                     res.json(err)
+//     //                                 }else{
+//     //                                     res.json(success)
+//     //                                 }
+//     //                             })
+//     //                             res.json("updated")
+//     //                         }
+//     //                     })
+//     //                     //ending bcrypt
+//     //                 }
+//     //             })
+//     //         }
+//     //         catch(err){
+//     //             console.log(err)
+//     //         }
+//     //     }
+//     // })
+// })
+
+
+
+
+passport.use(new GoogleStrategy({
+    clientID:"298046608597-tovb9uj457h1vfpr8i58f30gu9up8pqq.apps.googleusercontent.com",
+    clientSecret: "Jiu3vPG60O36oaETwESvtwtX",
+    callbackURL: 'http://localhost:8000/auth/google/callback',
+    passReqToCallback:true
+},
+async(accessToken,refreshToken,profile,done)=>{
+    console.log(profile)
+    const newUser={
+        googleId:profile.id,
+        name:profile.displayName,
+        email:profile.email,
+    }
+    let user=await Googleuser.findOne({googleId:profile.id})
+    if(user){
+        done(null,user)
+    }else{
+        user =await Googleuser.create(newUser)
+        done(null,user)
+    }
+}))
+
+passport.serializeUser((user,done)=>{
+    done(null,user.id)
 })
-app.get('/googlelogin',(req,res)=>{
 
+passport.deserializeUser((id,done)=>{
+    Googleuser.findById(id,(err,user)=>done(err,user))
 })
 
+app.get('/success',(req,res)=>{
+    res.render('/')
+})
+
+app.get('/failed',(req,res)=>{})
+
+app.get('/google',passport.authenticate('google',{scope:['profile','email']}))
+
+app.get('/google/callback',passport.authenticate('google',{failureRedirect:'/failed'}),
+   function(req,res){ 
+      res.redirect('/success')
+   }
+)
 
 module.exports=app;
-
-//headers
-//<script src="https://apis.google.com/js/platform.js" async defer></script>
-//<meta name="google-signin-client_id" content="298046608597-tovb9uj457h1vfpr8i58f30gu9up8pqq.apps.googleusercontent.com">
-//button
-// <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
