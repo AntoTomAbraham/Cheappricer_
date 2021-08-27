@@ -8,6 +8,8 @@ exports.requireAuth=(req,res,next)=>{
                 next();
             }
         })
+    }else if(req.isAuthenticated()){
+        next()
     }else{
         res.redirect('/auth/login')
     }

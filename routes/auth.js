@@ -423,4 +423,11 @@ app.get('/google/callback',passport.authenticate('google',{failureRedirect:'/fai
    }
 )
 
+app.get('/logout',(req,res)=>{
+    req.logout();
+    res.redirect('/')
+    //
+})
+
+
 module.exports=app;
