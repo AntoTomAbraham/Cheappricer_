@@ -31,7 +31,8 @@ api=["6c5f48cb84d547bd919b47d1c2a07c83",
     "616fbfeffed146f0af10843360a7e114",
     "0e55b0dc4682490580199b1ebe8b69f1",
     "68e064407dc540a488b44743b2308852",
-    "5f41628cee464b1ca69e98617ab65971"
+    "5f41628cee464b1ca69e98617ab65971",
+    "8e4b1bcc222a4c65aa739175c8ede232"
 ]
 
 client = ScrapingAntClient(token=api[random.randint(0,len(api)-1)])

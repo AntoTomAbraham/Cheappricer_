@@ -57,18 +57,58 @@ app.get('/dashBoard',requireAuth,async(req,res)=>{
 app.get('/dashBoard/additems',requireAuth,(req,res)=>{
     res.render('admin/admin');
 });
-app.get("/dashBoard/dbProducts",requireAuth,(req,res)=>{
-    Product.find({},(err,data)=>{
+
+
+app.route("/dashBoard/dbProducts")
+    .get(requireAuth,(req,res)=>{
+        Product.find({},(err,data)=>{
+            if(err){
+                res.send(err);
+            }
+            else{
+                //res.send(data[0]);
+                res.render("admin/table",{data:data})
+            }
+        })
+    })
+    .post((req,res)=>{
+        var id=req.body.sproId;
+        var brand=req.body.sBrand;
+        if(id!=undefined){
+            res.redirect("/admin/dashboard/dbProducts/proIdSearch/"+id)
+        }
+        else{
+            res.redirect("/admin/dashboard/dbProducts/proBrandSearch/"+brand)
+        }
+        //res.redirect("/admin/dashboard/dbProducts/proIdSearch/"+req.body.sproId)
+    })
+
+
+app.get("/dashboard/dbProducts/proIdSearch/:data",requireAuth,(req,res)=>{
+   Product.find({proId:parseInt(req.params.data)},(err,data)=>{
+       if(err){
+           res.send(err);
+       }
+       else{
+           res.render("admin/table",{data:data});
+       }
+   })
+})
+
+app.get("/dashboard/dbProducts/proBrandSearch/:data",requireAuth,(req,res)=>{
+    var word=req.params.data
+    word=word.charAt(0).toUpperCase()+word.slice(1);
+    Product.find({brand:word},(err,data)=>{
         if(err){
             res.send(err);
         }
         else{
-            //res.send(data[0]);
-            res.render("admin/table",{data:data})
+            //res.send(data)
+            res.render("admin/table",{data:data});
         }
     })
-    //res.send("Products")
-});
+ })
+
 
 
 
