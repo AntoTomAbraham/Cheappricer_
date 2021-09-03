@@ -56,16 +56,18 @@ def date_update(failures):
     set_key(dotenv_file, "FAILURES", os.environ["FAILURES"]) #saving failures
 
 def amazon_india(url):
-    page = client.general_request(url)
-    soup=BeautifulSoup(page.content,"html.parser")
     try:
         try:
+            page = client.general_request(url)
+            soup=BeautifulSoup(page.content,"html.parser")
             price=soup.find(class_="a-size-medium a-color-price priceBlockDealPriceString").text
             price=price[1:]
             price=price.split(",");
             price="".join(price)
             return float(price)
         except:
+            page = client.general_request(url)
+            soup=BeautifulSoup(page.content,"html.parser")
             price=soup.find(class_="a-size-medium a-color-price priceBlockBuyingPriceString").text
             price=price[1:]
             price=price.split(",");
