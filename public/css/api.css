@@ -1,0 +1,82 @@
+html{
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    
+  }
+  body{
+    background-color: white !important;
+    margin: 0;
+    max-width: 100%;
+    font-family: 'Nunito', sans-serif;
+  }
+  
+  .logo-img{
+    border: 5px solid #D27F1D;
+    box-sizing: border-box;
+    border-radius: 65px;
+  }
+  
+  .logo-text{
+    padding-top: 40px;
+    padding-left: 5px;
+    font-size: 30px;
+  }
+
+  /*body-1*/
+
+  #body-1{
+      padding-top: 30px;
+      background-color: cadetblue;
+      text-align: center;
+      padding-bottom: 80px;
+      max-width: 100%;
+  }
+
+  .blk-images{
+      width: 90px;
+      height: 80px;
+      padding-left: 10px;
+      padding-top: 20px;
+       
+  }
+
+  #intro{
+      text-align: center;
+      padding-top: 30px;
+      padding-bottom: 30px;
+      margin: auto;
+      width: 50%;
+  }
+
+  #intro-table {
+    border-collapse: collapse;
+    width: 80%;
+    text-align: center;
+    
+  }
+  
+  #intro-table td, #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  #intro-table tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #intro-table tr:hover {background-color: #ddd;}
+  
+  #intro-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: rebeccapurple;
+    color: white;
+  }
+
+  #docs-main{
+      background-color: beige;
+      padding-top: 40px;
+      padding-right: 20px;
+      padding-left: 20px;
+      padding-bottom: 20px;
+  }
+  

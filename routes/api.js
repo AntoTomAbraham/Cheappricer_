@@ -16,7 +16,7 @@ var file1=fs.readFileSync('JSON_Data/price_data.json');
 var price_data=JSON.parse(file1);
 
 app.get("/",(req,res)=>{
-    res.send("API")
+    res.render("api/api")
 })
 
 //using productId
