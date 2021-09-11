@@ -19,9 +19,31 @@ app.get("/",(req,res)=>{
     res.render("api/api")
 })
 
-//using productId
+//using productId with date
 app.get("/priceData",(req,res)=>{
-    res.send(price_data[req.query.proId])
+    if(req.query.date!=undefined){
+        try{
+            res.send(price_data[req.query.proId][req.query.date]);
+        }
+        catch{
+            res.send("ERROR!")
+        }
+    }
+    else{
+        try{
+            //when proid is ALL, all the price data in JSON is displayed! 
+            if(req.query.proId=="ALL"){
+                res.send(price_data);
+            }
+            else{
+                res.send(price_data[req.query.proId]);
+            }
+        }
+        catch{
+            res.send("ERROR");
+        }
+        
+    }
 
 })
 
