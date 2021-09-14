@@ -16,14 +16,15 @@ app.get("/",(req,res)=>{
     res.render("product/home")
 })
 
-
-
 const adminRoutes=require('./routes/admin')
 const authRoutes=require('./routes/auth')
 const productRoutes=require('./routes/products')
+const apiRoutes=require('./routes/api')
+
 app.use('/admin',adminRoutes)
 app.use('/auth',authRoutes)
 app.use('/product',productRoutes)
+app.use('/api',apiRoutes)
 
 mongoose.connect(
     "mongodb+srv://CheapPricer:Cheappricer@_2021@cluster0.ivs2l.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",

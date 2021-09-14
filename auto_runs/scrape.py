@@ -60,6 +60,7 @@ def amazon_india(url):
     soup=BeautifulSoup(page.content,"html.parser")
     try:
         try:
+
             price=soup.find(class_="a-size-medium a-color-price priceBlockDealPriceString").text
             price=price[1:]
             price=price.split(",");
@@ -179,7 +180,7 @@ for i in range(0,len(p_data)):
                     flipkart_price=flipkart(p_data[prd_id][site])
                     if(flipkart_price==0):
                         failures+=1
-                        mail_notify(p_data[prd_id][site],"Flipkart",p_data[prd_id]["p_name"])
+                        mail_notify(p_data[prd_id][site],"Flipkart",prd_id+": "+p_data[prd_id]["p_name"])
 
             elif(site=="rel_digi"):
                 if(p_data[prd_id][site]==""):
@@ -188,7 +189,7 @@ for i in range(0,len(p_data)):
                     rel_digital_price=rel_digital(p_data[prd_id][site])
                     if(rel_digital_price==0):
                         failures+=1
-                        mail_notify(p_data[prd_id][site],"Reliance_Digital",p_data[prd_id]["p_name"])
+                        mail_notify(p_data[prd_id][site],"Reliance_Digital",prd_id+": "+p_data[prd_id]["p_name"])
 
             elif(site=="croma"):
                 if(p_data[prd_id][site]==""):
@@ -197,7 +198,7 @@ for i in range(0,len(p_data)):
                     croma_price=croma(p_data[prd_id][site])
                     if(croma_price==0):
                         failures+=1
-                        mail_notify(p_data[prd_id][site],"croma",p_data[prd_id]["p_name"])
+                        mail_notify(p_data[prd_id][site],"croma",prd_id+": "+p_data[prd_id]["p_name"])
                     
             elif(site=="dell_pc"):
                 if(p_data[prd_id][site]==""):
@@ -206,7 +207,7 @@ for i in range(0,len(p_data)):
                     dell_india_pc_price=dell_india_pc(p_data[prd_id][site])
                     if(dell_india_pc_price==0):
                         failures+=1
-                        mail_notify(p_data[prd_id][site],"Dell_India_pc",p_data[prd_id]["p_name"])
+                        mail_notify(p_data[prd_id][site],"Dell_India_pc",prd_id+": "+p_data[prd_id]["p_name"])
             else:
                 pass
             #opening price_data.json
