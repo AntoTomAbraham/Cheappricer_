@@ -177,7 +177,7 @@ app.post('/login',(req,res)=>{
                 }
                 if(result){
                     const token=jwt.sign({
-                        email:email
+                        email:req.body.email
                     },"shshshshshsh",
                     {
                         expiresIn:"1h"
@@ -191,7 +191,9 @@ app.post('/login',(req,res)=>{
 })
 
 //get route for forgotpassword
-app.get('/forgotpassword',(req,res)=>{})
+app.get('/forgotpassword',(req,res)=>{
+    res.render('auth/forgotpassword')
+})
 
 //post route for forgotPassword
 app.post('/forgotPassword',(req,res)=>{
@@ -260,7 +262,7 @@ app.get('/resetPassword/:email/:token',(req,res,next)=>{
                 }else{
                 const payload=jwt.verify(token,secret)
                 console.log("success")
-                res.render()
+                res.render('auth/resetpassword')
                 }
             })
             }
@@ -289,6 +291,7 @@ app.post('/resetpassword',(req,res)=>{
                             msg:"No user"
                         })  
                     }else{
+                        console.log("successfully updated")
                         res.json("entered to extend") 
                     }
               })
