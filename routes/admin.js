@@ -53,6 +53,11 @@ app.get('/dashBoard',requireAuth,async(req,res)=>{
     res.render('admin/adminHome',{length:len,time:time,failures:failures});
 })
 
+app.route('/dashBoard/editPrice')
+    .get((req,res)=>{
+        res.render('admin/priceedit')
+    })
+
 //requireAuth is the middleware to make route protected
 app.get('/dashBoard/additems',requireAuth,(req,res)=>{
     res.render('admin/admin');
