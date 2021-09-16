@@ -1,29 +1,37 @@
 <%- include("adminHeader") -%>
-            <div class="edit-block">
-                <table style="border: 0cm">
-                    <tr>
-                        <td>
-                            <form method="post" action="/admin/dashBoard/editPrice">
-                                <label for="proId">Product-Id:</label>
-                                <input type="number" id="proId" name="proId" required><br>
-                                <label for="proDate">Product-Date(dd/mm/yyyy):</label>
-                                <input type="text" id="proDate" name="proDate" required>
-                                <br><h4 class="ontime-price">Current-Price:</h4>
-                                <label for="vendor">Choose vendor:</label>
-                                <select name="vendor" id="vendor">
-                                    <option value="select">-Select-</option>
-                                    <option value="amazon_india">Amazon_India</option>
-                                    <option value="flipkart">Flipkart</option>
-                                    <option value="croma">Croma</option>
-                                    <option value="reliance_digital">Reliance_Digital</option>
-                                    <option value="dell">Dell</option>
-                                </select>
-                                <label for="newPrice">Add New Price(float-with .0):</label>
-                                <input type="text" id="newPrice" name="newPrice" required>
-
-                                <!--<input type="submit" value="🔍"> -->
-                            </form>
-                        </td>
-                    </tr>
-                </table>     
+            <div>
+                <h5 class="Time" style="background-color: brown;">Time: <span id="time"></span>
             </div> 
+            <section style="padding-left: 10px;padding-top:20px;">
+                <div class="edit-block">
+                    <table style="border: 0cm">
+                        <tr>
+                            <td>
+                                <form method="post" action="/admin/dashBoard/editPrice">
+                                    <label for="proId">Product-Id:</label>
+                                    <input type="number" id="proId" name="proId" required><br>
+                                    <label for="proDate">Product-Date(dd/mm/yyyy):</label>
+                                    <input type="text" id="proDate" name="proDate" required>
+                                    <br><h4 class="ontime-price">Current-Price:<span class="cr-price"></span></h4>
+                                    <label for="vendor">Choose vendor:</label>
+                                    <select name="vendor" id="vendor">
+                                        <option value="select">-Select-</option>
+                                        <option value="amazon_india">Amazon_India</option>
+                                        <option value="flipkart">Flipkart</option>
+                                        <option value="croma">Croma</option>
+                                        <option value="reliance_digital">Reliance_Digital</option>
+                                        <option value="dell">Dell</option>
+                                    </select>
+                                    <label for="newPrice">Add New Price(float-with .0):</label>
+                                    <input type="text" id="newPrice" name="newPrice" required>
+                                    <input type="submit">
+                                    <!--<input type="submit" value="🔍"> -->
+                                </form>
+                            </td>
+                        </tr>
+                    </table>     
+                </div> 
+            </section>
+            <script src="/JS/price_edit.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        </body>
