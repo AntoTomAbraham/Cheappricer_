@@ -1,0 +1,29 @@
+.head-container div{
+    float: left;
+    clear: none; 
+}
+
+.content-container{
+    width:800px; 
+    margin:0 auto;
+}
+
+.content{
+    width: 400px;
+    margin: 70px; 
+}
+
+.head_content{
+    margin-top: 60px;
+}
+
+.subText{
+    font-family: sans-serif ,  'Open Sans';
+}
+.button {
+    padding: 10px 30px;
+    background: yellow;
+    border: none;
+    color: black;
+    border-radius: 100px 100px 100px 100px;
+  }
