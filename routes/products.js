@@ -6,6 +6,9 @@ app.get('/',(req,res)=>{
     res.render('product/home')
 })
 
+app.get('/landing',(req,res)=>{
+    res.render('product/landing')
+})
 
 
 

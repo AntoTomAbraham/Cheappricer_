@@ -64,7 +64,13 @@ app.post('/signup',[
                 },
                 );
                 //sending mail to the user for verification
-                const linkk=`http://localhost:8000/auth/confirm/${email}/${token}`
+                const linkk=""
+                if (process.env.NODE_ENV === "production") {
+                    linkk=`https://cheappricer.azurewebsites.net/auth/confirm/${email}/${token}`
+                }
+                else{
+                linkk=`http://localhost:8000/auth/confirm/${email}/${token}`
+                }
                 var transport=nodemailer.createTransport(
                     {
                         service:'gmail',
@@ -212,7 +218,13 @@ app.post('/forgotPassword',(req,res)=>{
                 firstname:user.firstname,
             }
             const token=jwt.sign(payload,secret,{expiresIn:'15m'})
-            const link=`http://localhost:8000/auth/resetPassword/${user[0].email}/${token}`
+            const link="";
+            if (process.env.NODE_ENV === "production") {
+                link=`https://cheappricer.azurewebsites.net/auth/resetPassword/${user[0].email}/${token}`
+            }
+            else{
+                link=`http://localhost:8000/auth/resetPassword/${user[0].email}/${token}`
+            }
             var transport=nodemailer.createTransport(
                 {
                     service:'gmail',
