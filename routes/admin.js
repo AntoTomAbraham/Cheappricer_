@@ -10,7 +10,8 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 // require("dotenv").config()
-
+var file1=fs.readFileSync('JSON_Data/price_data.json');
+var price_data=JSON.parse(file1);
 
 const app=express();
 app.use(bodyParser.urlencoded({extended: true}));
@@ -58,6 +59,32 @@ app.route('/dashBoard/editPrice')
         res.render('admin/priceedit')
     })
 
+app.get("/dashBoard/api/priceData",(req,res)=>{
+    if(req.query.date!=undefined){
+        try{
+            res.send(price_data[req.query.proId][req.query.date]);
+        }
+        catch{
+            res.send("ERROR!")
+        }
+    }
+    else{
+        try{
+            //when proid is ALL, all the price data in JSON is displayed! 
+            if(req.query.proId=="ALL"){
+                res.send(price_data);
+            }
+            else{
+                res.send(price_data[req.query.proId]);
+            }
+        }
+        catch{
+            res.send("ERROR");
+        }
+        
+    }
+
+})
 //requireAuth is the middleware to make route protected
 app.get('/dashBoard/additems',requireAuth,(req,res)=>{
     res.render('admin/admin');

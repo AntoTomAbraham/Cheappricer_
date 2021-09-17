@@ -13,9 +13,26 @@ function checkTime(i) {
     if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
     return i;
 }
-d3.json("/JSON_Data/price_data.json").then(function(data_json) {
-    console.log(data_json);
-})
+
+// fetch('api/priceData?proId=ALL')
+// .then(response => {
+//     if (!response.ok) {
+//         throw new Error("HTTP error " + response.status);
+//     }
+//    j_data=response.json();
+// })
+var jdata;
+
+async function readJson(){
+    fetch('api/priceData?proId=ALL').then(response => {
+        return response.json();
+      }).then(data => {
+        // Work with JSON data here
+        jdata=data;
+      }).catch(err => {
+        // Do something for an error here
+      });
+}
 
 
 var s_proid;
@@ -47,6 +64,7 @@ provendor.addEventListener("click", function() {
 
 provendor.addEventListener("change", function() {
     s_vendor=provendor.value;
+    console.log(jdata);
 
 });
 
