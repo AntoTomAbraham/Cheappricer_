@@ -13,10 +13,10 @@ function checkTime(i) {
     if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
     return i;
 }
+d3.json("/JSON_Data/price_data.json").then(function(data_json) {
+    console.log(data_json);
+})
 
-$.getJSON("JSON_Data/price_data.json", (data)=>{
-    console.log(data);
-});
 
 var s_proid;
 var s_prodate;
