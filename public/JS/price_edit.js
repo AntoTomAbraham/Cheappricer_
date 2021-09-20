@@ -23,16 +23,21 @@ function checkTime(i) {
 // })
 var jdata;
 
-async function readJson(){
-    fetch('api/priceData?proId=ALL').then(response => {
-        return response.json();
-      }).then(data => {
-        // Work with JSON data here
-        jdata=data;
-      }).catch(err => {
-        // Do something for an error here
-      });
+
+const JsonData=async()=>{
+    const response=await fetch('api/priceData?proId=ALL')
+    let data=await response.json();
+    return data;
 }
+
+jdata=(async () => {
+    var jdata=await JsonData();
+    return jdata;
+})()
+
+
+
+
 
 
 var s_proid;
@@ -45,12 +50,12 @@ const provendor=document.querySelector('#vendor');
 console.log(provendor);
 proid.addEventListener('input', ()=>{
     s_proid=proid.value;
-    console.log(s_proid);
+    //console.log(s_proid);
 });
 
 prodate.addEventListener('input', ()=>{
     s_prodate=prodate.value;
-    console.log(s_prodate);
+    //console.log(s_prodate);
 });
 
 provendor.addEventListener("click", function() {
@@ -64,7 +69,11 @@ provendor.addEventListener("click", function() {
 
 provendor.addEventListener("change", function() {
     s_vendor=provendor.value;
-    console.log(jdata);
+    jdata.then((data)=>{
+        console.log(data[s_proid][s_prodate][s_vendor]);
+
+        document.getElementById("cr-price").innerHTML = "₹"+data[s_proid][s_prodate][s_vendor];
+    });
 
 });
 

@@ -10,18 +10,18 @@
                                 <form method="post" action="/admin/dashBoard/editPrice">
                                     <label for="proId">Product-Id:</label>
                                     <input type="number" id="proId" name="proId" required><br>
-                                    <label for="proDate">Product-Date(dd/mm/yyyy):</label>
+                                    <label for="proDate">Product-Date(dd-mm-yyyy):</label>
                                     <input type="text" id="proDate" name="proDate" required>
-                                    <br><h4 class="ontime-price">Current-Price:<span class="cr-price"></span></h4>
+                                    <br><h4 class="ontime-price">Current-Price: <span id="cr-price"></span></h4>
                                     <label for="vendor">Choose vendor:</label>
                                     <select name="vendor" id="vendor">
                                         <option value="select">-Select-</option>
                                         <option value="amazon_india">Amazon_India</option>
                                         <option value="flipkart">Flipkart</option>
                                         <option value="croma">Croma</option>
-                                        <option value="reliance_digital">Reliance_Digital</option>
-                                        <option value="dell">Dell</option>
-                                    </select>
+                                        <option value="rel_digi">Reliance_Digital</option>
+                                        <option value="dell_india_pc">Dell</option>
+                                    </select><br>
                                     <label for="newPrice">Add New Price(float-with .0):</label>
                                     <input type="text" id="newPrice" name="newPrice" required>
                                     <input type="submit">
