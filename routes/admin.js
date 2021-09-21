@@ -58,6 +58,26 @@ app.route('/dashBoard/editPrice')
     .get((req,res)=>{
         res.render('admin/priceedit')
     })
+    .post((req,res)=>{
+        const proid=req.body.proId;
+        const prodate=req.body.proDate;
+        const provendor=req.body.vendor;
+        const newprice=req.body.newPrice;
+
+        var file=fs.readFileSync('JSON_Data/price_data.json');
+        var objData=JSON.parse(file);
+        objData[proid][prodate][provendor]=parseFloat(newprice);
+        //console.log(objData);
+
+        fs.writeFile('JSON_Data/price_data.json', JSON.stringify(objData,null,2), err => {
+            // error checking
+            if(err) throw err;
+            
+            console.log("New data added");
+        });
+
+
+    })
 
 app.get("/dashBoard/api/priceData",(req,res)=>{
     if(req.query.date!=undefined){
