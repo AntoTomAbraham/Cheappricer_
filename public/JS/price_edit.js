@@ -80,3 +80,4 @@ provendor.addEventListener("change", function() {
 function addActivityItem() {
     // ... Code to add item here
 }
+

@@ -1,0 +1,68 @@
+<%- include("adminHeader") -%>
+            <div>
+                <h5 class="Time" style="background-color: brown;">Time: <span id="time"></span>
+            </div> 
+            <section id="price-info">
+                <h3>Price Information</h3>
+                <div class="price-content">
+                    <div class="price-op">
+                        <form>
+                            <label for="proId">Product-Id:</label>
+                            <input type="number" id="inf-proId" name="inf-proId" required>
+                            <label for="proDate">Product-Date:</label>
+                            <input type="text" id="inf-proDate" name="inf-proDate" required>
+                            <input type="submit">
+                        </form>
+                    </div>
+                    <table>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Product Id</th>
+                        </tr>
+                        <tr>
+                            <td id="dprname">test</td>
+                            <td id="dprid">4</td>
+                        </tr>
+                    </table>
+                    <br>
+                    <table>
+                        <tr>
+                            <th>Date</th>
+                            <th>AmazonIndia</th>
+                            <th>Flipkart</th>
+                            <th>croma</th>
+                            <th>RelianceDigital</th>
+                            <th>DellIndia</th>
+
+                        </tr>
+                    </table>
+                </div>
+            </section>
+            <section style="padding-left: 10px;padding-top:20px;">
+                <h3>Edit Price</h3>
+                <div class="edit-block">
+                    <form method="post" action="/admin/dashBoard/pricing">
+                        <label for="proId">Product-Id:</label>
+                        <input type="number" id="proId" name="proId" required><br>
+                        <label for="proDate">Product-Date(dd-mm-yyyy):</label>
+                        <input type="text" id="proDate" name="proDate" required>
+                        <br><h4 class="ontime-price">Current-Price: <span id="cr-price"></span></h4>
+                        <label for="vendor">Choose vendor:</label>
+                        <select name="vendor" id="vendor">
+                            <option value="select">-Select-</option>
+                            <option value="amazon_india">Amazon_India</option>
+                            <option value="flipkart">Flipkart</option>
+                            <option value="croma">Croma</option>
+                            <option value="rel_digi">Reliance_Digital</option>
+                            <option value="dell_india_pc">Dell</option>
+                        </select><br>
+                        <label for="newPrice">Add New Price(float-with .0):</label>
+                        <input type="text" id="newPrice" name="newPrice" required>
+                        <input type="submit">
+                        <!--<input type="submit" value="🔍"> -->
+                    </form>
+                </div> 
+            </section>
+            <script src="/JS/price_edit.js"></script>
+            
+        </body>

@@ -1,0 +1,29 @@
+
+
+.edit-block{
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: lightseagreen;
+    width: 40%;
+    border-radius: 10px;
+}
+
+.price-content{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 10px;
+    background-color: cornflowerblue;
+    width: 50%;
+    border-radius: 10px;
+}
+
+#price-info{
+    padding-left: 10px;
+    padding-top:20px;
+}
+
+table, th, td {
+    padding-top: 5px;
+    border: 1px solid black;
+}

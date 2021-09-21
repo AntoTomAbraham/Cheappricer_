@@ -54,9 +54,9 @@ app.get('/dashBoard',requireAuth,async(req,res)=>{
     res.render('admin/adminHome',{length:len,time:time,failures:failures});
 })
 
-app.route('/dashBoard/editPrice')
+app.route('/dashBoard/pricing')
     .get((req,res)=>{
-        res.render('admin/priceedit')
+        res.render('admin/pricing')
     })
     .post((req,res)=>{
         const proid=req.body.proId;
