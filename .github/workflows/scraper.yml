@@ -2,7 +2,7 @@ name: scrap-price-data
 
 on:
   schedule:
-    - cron: '30,0 3,10 * * *'   #runs @3:30am & @10:00 UTC everyday [09:00am & 03:30pm IST]   #cron set using: https://crontab.guru/ #timeconv. converter: https://savvytime.com/converter/utc-to-ist 
+    - cron: '00 9 * * *'   #runs @3:30am & @9:30 UTC everyday [09:00am & 03:00pm IST]   #cron set using: https://crontab.guru/ #timeconv. converter: https://savvytime.com/converter/utc-to-ist 
   workflow_dispatch:
 
 jobs:
@@ -16,7 +16,7 @@ jobs:
       - name: setup python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x' # install the python version needed
+          python-version: '3.6' # install the python version needed
           
       - name: install python packages
         run: |

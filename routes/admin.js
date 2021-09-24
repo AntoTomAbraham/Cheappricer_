@@ -6,14 +6,18 @@ const bodyParser = require('body-parser')
 router.use(bodyParser.json())
 var jwt = require('jsonwebtoken');
 var cookieParser = require('cookie-parser')
+const dotenv = require('dotenv');
+dotenv.config();
 
 // require("dotenv").config()
-
+var file1=fs.readFileSync('JSON_Data/price_data.json');
+var price_data=JSON.parse(file1);
 
 const app=express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser())
 
+//Middleware for making protected route
 const requireAuth=(req,res,next)=>{
     const token=req.cookies.jwt;
     if(token){
@@ -33,18 +37,130 @@ app.get('/',(req,res)=>{
     res.render('admin/adminAuth')
 })
 
+app.get('/signout',(req,res)=>{
+    res.clearCookie("jwt");
+    res.redirect('/admin')
+})
+
+//requireAuth is the middleware to make route protected
 app.get('/dashBoard',requireAuth,async(req,res)=>{
     let len;
     await Product.find().count()
    .then(length=>{
        len=length;
    })
-    res.render('admin/adminHome',{length:len});
+   var time=`${process.env.PRICE_UPD_TIME}`;
+   var failures=`${process.env.FAILURES}`;
+    res.render('admin/adminHome',{length:len,time:time,failures:failures});
 })
 
-app.get('/dashBoard/additems',(req,res)=>{
-    res.render('admin/admin');
+app.route('/dashBoard/pricing')
+    .get((req,res)=>{
+        res.render('admin/pricing')
+    })
+    .post((req,res)=>{
+        const proid=req.body.proId;
+        const prodate=req.body.proDate;
+        const provendor=req.body.vendor;
+        const newprice=req.body.newPrice;
+
+        var file=fs.readFileSync('JSON_Data/price_data.json');
+        var objData=JSON.parse(file);
+        objData[proid][prodate][provendor]=parseFloat(newprice);
+        //console.log(objData);
+
+        fs.writeFile('JSON_Data/price_data.json', JSON.stringify(objData,null,2), err => {
+            // error checking
+            if(err) throw err;
+            
+            console.log("New data added");
+        });
+
+
+    })
+
+app.get("/dashBoard/api/priceData",(req,res)=>{
+    if(req.query.date!=undefined){
+        try{
+            res.send(price_data[req.query.proId][req.query.date]);
+        }
+        catch{
+            res.send("ERROR!")
+        }
+    }
+    else{
+        try{
+            //when proid is ALL, all the price data in JSON is displayed! 
+            if(req.query.proId=="ALL"){
+                res.send(price_data);
+            }
+            else{
+                res.send(price_data[req.query.proId]);
+            }
+        }
+        catch{
+            res.send("ERROR");
+        }
+        
+    }
+
 })
+//requireAuth is the middleware to make route protected
+app.get('/dashBoard/additems',requireAuth,(req,res)=>{
+    res.render('admin/admin');
+});
+
+
+app.route("/dashBoard/dbProducts")
+    .get(requireAuth,(req,res)=>{
+        Product.find({},(err,data)=>{
+            if(err){
+                res.send(err);
+            }
+            else{
+                //res.send(data[0]);
+                res.render("admin/table",{data:data})
+            }
+        })
+    })
+    .post((req,res)=>{
+        var id=req.body.sproId;
+        var brand=req.body.sBrand;
+        if(id!=undefined){
+            res.redirect("/admin/dashboard/dbProducts/proIdSearch/"+id)
+        }
+        else{
+            res.redirect("/admin/dashboard/dbProducts/proBrandSearch/"+brand)
+        }
+        //res.redirect("/admin/dashboard/dbProducts/proIdSearch/"+req.body.sproId)
+    })
+
+
+app.get("/dashboard/dbProducts/proIdSearch/:data",requireAuth,(req,res)=>{
+   Product.find({proId:parseInt(req.params.data)},(err,data)=>{
+       if(err){
+           res.send(err);
+       }
+       else{
+           res.render("admin/table",{data:data});
+       }
+   })
+})
+
+app.get("/dashboard/dbProducts/proBrandSearch/:data",requireAuth,(req,res)=>{
+    var word=req.params.data
+    word=word.charAt(0).toUpperCase()+word.slice(1);
+    Product.find({brand:word},(err,data)=>{
+        if(err){
+            res.send(err);
+        }
+        else{
+            //res.send(data)
+            res.render("admin/table",{data:data});
+        }
+    })
+ })
+
 
 
 
@@ -105,7 +221,7 @@ app.post('/create',async (req,res)=>{
         console.log("New data added");
     });
     
-
+    
     var fileAff=fs.readFileSync('JSON_Data/affiliate_data.json'); //reading JSON --affiliate_data.json
     var objDataAff=JSON.parse(fileAff); //PARSING
     objDataAff[arrId]={ //New data object
@@ -174,6 +290,7 @@ app.get('/Pricejson',(req,res)=>{
     
 })
 
+//Creating token and saving it to Cookie!
 app.post('/login', (req,res)=>{
     console.log("enterd into signin")
     const {email, password}=req.body;

@@ -2,6 +2,7 @@ const express=require('express');
 const app=express()
 const bodyParser=require("body-parser")
 const mongoose=require('mongoose');
+const session=require('express-session')
 
 const path=require('path')
 
@@ -10,22 +11,24 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 
+
 app.get("/",(req,res)=>{
     res.render("product/home")
 })
 
-
-
 const adminRoutes=require('./routes/admin')
 const authRoutes=require('./routes/auth')
 const productRoutes=require('./routes/products')
+const apiRoutes=require('./routes/api')
+
 app.use('/admin',adminRoutes)
 app.use('/auth',authRoutes)
 app.use('/product',productRoutes)
+app.use('/api',apiRoutes)
 
 mongoose.connect(
     "mongodb+srv://CheapPricer:Cheappricer@_2021@cluster0.ivs2l.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
- {
+{
     useNewUrlParser: true,
     useUnifiedTopology:true,
     useCreateIndex:true

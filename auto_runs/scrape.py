@@ -1,8 +1,11 @@
 from bs4 import BeautifulSoup
-import requests,json,time,math,random
+import requests,json,time,math,random,os
 from requests_html import HTMLSession
 from datetime import datetime
+from dotenv import load_dotenv,find_dotenv,set_key
 from scrapingant_client import ScrapingAntClient
+from pytz import timezone
+
 
 headers = { 
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', 
@@ -12,8 +15,8 @@ headers = {
     'DNT' : '1', # Do Not Track Request Header 
     'Connection' : 'close'
 }
-#ScrapingAnt 
 
+#ScrapingAnt 
 api=["6c5f48cb84d547bd919b47d1c2a07c83",
     "8bc22ffde48a4ca580c17c0e08f1aa06",
     "a85797bb968b4ac09465c211cd1a0316",
@@ -25,44 +28,55 @@ api=["6c5f48cb84d547bd919b47d1c2a07c83",
     "2227f6b9c0c14b03b6b4bc4626bf03fa",
     "d8904e15572c4c0d8e55c4699afef215",
     "1b1b9a94e5e94265a8a31614b4f2c58c",
-    "616fbfeffed146f0af10843360a7e114"
+    "616fbfeffed146f0af10843360a7e114",
+    "0e55b0dc4682490580199b1ebe8b69f1",
+    "68e064407dc540a488b44743b2308852",
+    "5f41628cee464b1ca69e98617ab65971",
+    "8e4b1bcc222a4c65aa739175c8ede232",
+    "581125a4195d4021959233797411d217",
+    "74e7b217ea5b42dc8828b14e63ea2143"
 ]
 
 client = ScrapingAntClient(token=api[random.randint(0,len(api)-1)])
-
+now = datetime.now()
+dotenv_file =find_dotenv()
+load_dotenv()
 
 # ALL RETURNING PRICES ARE IN FLOAT FORMAT
 
 def get_date():
-    now = datetime.now()
     dt_string = now.strftime("%d-%m-%Y")
     return dt_string
 
+def date_update(failures):
+    format = "%d-%m %H:%M %Z"
+    now_utc = datetime.now(timezone('UTC'))
+    now_asia = now_utc.astimezone(timezone('Asia/Kolkata'))
+    os.environ['PRICE_UPD_TIME']=now_asia.strftime(format)
+    set_key(dotenv_file, "PRICE_UPD_TIME", os.environ["PRICE_UPD_TIME"])
+    os.environ['FAILURES']=str(failures)
+    set_key(dotenv_file, "FAILURES", os.environ["FAILURES"]) #saving failures
 
 def amazon_india(url):
+    page = client.general_request(url)
+    soup=BeautifulSoup(page.content,"html.parser")
     try:
-        time.sleep(3)
         try:
-            #page=requests.get(url,headers=headers)
-            page = client.general_request(url)
-            soup=BeautifulSoup(page.content,"html.parser")
+
             price=soup.find(class_="a-size-medium a-color-price priceBlockDealPriceString").text
+            price=price[1:]
+            price=price.split(",");
+            price="".join(price)
+            return float(price)
         except:
-            #page=requests.get(url,headers=headers)
-            page = client.general_request(url)
-            soup=BeautifulSoup(page.content,"html.parser")
             price=soup.find(class_="a-size-medium a-color-price priceBlockBuyingPriceString").text
-        price=price[1:]
-        price=price.split(",");
-        price="".join(price)
-        return float(price)
+            price=price[1:]
+            price=price.split(",");
+            price="".join(price)
+            return float(price)
     except:
-        return 0
         print("Price Unavailable --AMZIN")
-
-
-            
-
+        return 0
     
 
 def flipkart(url):
@@ -75,8 +89,8 @@ def flipkart(url):
         price="".join(price)
         return float(price)
     except:
-        return 0
         print("Price Unavailable --FLP")
+        return 0
 
 
 def croma(url):
@@ -95,8 +109,8 @@ def croma(url):
         else:
             return x
     except:
-        return 0
         print("Price Unavailable --CROMA")
+        return 0
     
 
 
@@ -111,8 +125,8 @@ def rel_digital(url):
         price="".join(price)
         return float(price)
     except:
-        return 0
         print("Price Unavailable --REL_DIGI")
+        return 0
 
 def dell_india_pc(url): #only for laptops & desktops
     page=requests.get(url,headers=headers)
@@ -126,8 +140,8 @@ def dell_india_pc(url): #only for laptops & desktops
         price="".join(price)
         return float(price)
     except:
-        return 0
         print("Price Unavailable --DELL-PC")
+        return 0
 
 
 #mailing
@@ -139,7 +153,7 @@ def mail_notify(url,site,p_name):
 
 
 prd_id="1"
-
+failures=0 #setting failures to 0!
 #getting data & running scrapping funcs from product_data.json
 date=get_date() #getting date
 
@@ -158,7 +172,8 @@ for i in range(0,len(p_data)):
                 else:
                     amazon_india_price=amazon_india(p_data[prd_id][site])
                     if(amazon_india_price==0):
-                        mail_notify(p_data[prd_id][site],"Amazon_India",p_data[prd_id]["p_name"])
+                        failures+=1
+                        mail_notify(p_data[prd_id][site],"Amazon_India",prd_id+": "+p_data[prd_id]["p_name"])
 
             elif(site=="flipkart"):
                 if(p_data[prd_id][site]==""):
@@ -166,7 +181,8 @@ for i in range(0,len(p_data)):
                 else:
                     flipkart_price=flipkart(p_data[prd_id][site])
                     if(flipkart_price==0):
-                        mail_notify(p_data[prd_id][site],"Flipkart",p_data[prd_id]["p_name"])
+                        failures+=1
+                        mail_notify(p_data[prd_id][site],"Flipkart",prd_id+": "+p_data[prd_id]["p_name"])
 
             elif(site=="rel_digi"):
                 if(p_data[prd_id][site]==""):
@@ -174,7 +190,8 @@ for i in range(0,len(p_data)):
                 else:
                     rel_digital_price=rel_digital(p_data[prd_id][site])
                     if(rel_digital_price==0):
-                        mail_notify(p_data[prd_id][site],"Reliance_Digital",p_data[prd_id]["p_name"])
+                        failures+=1
+                        mail_notify(p_data[prd_id][site],"Reliance_Digital",prd_id+": "+p_data[prd_id]["p_name"])
 
             elif(site=="croma"):
                 if(p_data[prd_id][site]==""):
@@ -182,7 +199,8 @@ for i in range(0,len(p_data)):
                 else:
                     croma_price=croma(p_data[prd_id][site])
                     if(croma_price==0):
-                        mail_notify(p_data[prd_id][site],"croma",p_data[prd_id]["p_name"])
+                        failures+=1
+                        mail_notify(p_data[prd_id][site],"croma",prd_id+": "+p_data[prd_id]["p_name"])
                     
             elif(site=="dell_pc"):
                 if(p_data[prd_id][site]==""):
@@ -190,7 +208,8 @@ for i in range(0,len(p_data)):
                 else:
                     dell_india_pc_price=dell_india_pc(p_data[prd_id][site])
                     if(dell_india_pc_price==0):
-                        mail_notify(p_data[prd_id][site],"Dell_India_pc",p_data[prd_id]["p_name"])
+                        failures+=1
+                        mail_notify(p_data[prd_id][site],"Dell_India_pc",prd_id+": "+p_data[prd_id]["p_name"])
             else:
                 pass
             #opening price_data.json
@@ -213,7 +232,6 @@ for i in range(0,len(p_data)):
             try:
                 pr_data[prd_id].update(price_data)
 
-
             except:
                 pr_data[prd_id]=price_data  #for new ids
             
@@ -227,3 +245,4 @@ for i in range(0,len(p_data)):
     prd_id=int(prd_id)
     prd_id=prd_id+1
     prd_id=str(prd_id)
+date_update(failures)

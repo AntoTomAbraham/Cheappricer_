@@ -5,7 +5,7 @@ function startTime() {
     let s = today.getSeconds();
     m = checkTime(m);
     s = checkTime(s);
-    document.getElementById('txt').innerHTML =  h + ":" + m + ":" + s;
+    document.getElementById('time').innerHTML =  h + ":" + m + ":" + s;
     setTimeout(startTime, 1000);
 }
   
@@ -14,6 +14,15 @@ function checkTime(i) {
     return i;
 }
 
-var value=document.getElementsByClassName("failure-val").textContent;
+$(".products").click(()=>{
+    window.location.href = "dashBoard/dbProducts";
+})
 
-console.log(value)
+var failure_val=$(".failure-val").text();
+if(parseInt(failure_val)>0){
+    $(".failure").css( 'background-color', 'red' )
+
+}
+else{
+    $(".failure").css( 'background-color', 'green' )
+}

@@ -1,0 +1,70 @@
+<html>
+    <head>
+        <title>CheapPricer | Products Information</title>
+        <style>
+            table, th, td {
+                border: 1px solid black;
+            }
+
+            .search-div{
+                background-color: lightblue;
+                padding: 10px 10px 10px 10px;
+                border-radius: 10px;
+            }           
+        </style>
+    </head>
+    <body>
+        <h1>Products in DB ~ INFORMATION SYSTEM [IS-1]</h1>
+        <div class="search-div">
+            <h2 style="color: coral;">Search</h2>
+            <table style="border: 0cm">
+                <tr>
+                    <td>
+                        <form method="post" action="/admin/dashBoard/dbProducts">
+                            <label for="sproId">by proId</label>
+                            <input type="number" id="sproId" name="sproId" required>
+                            <input type="submit" value="🔍">
+                        </form>
+                    </td>
+                    <td>
+                        <form method="post" action="/admin/dashBoard/dbProducts">
+                            <label for="sBrand">by brandName</label>
+                            <input type="text" id="sBrand" name="sBrand" required>
+                            <input type="submit" value="🔍">
+                        </form>
+                    </td>
+                </tr>
+            </table>
+            
+        </div>
+        <br>
+        <table class="tb1">
+            <tr>
+                <th>proId</th>
+                <th>productName(URL)</th>
+                <th>Brand</th>
+                <th>Category</th>
+                <th>subCategory</th>
+            </tr>
+            <% for(var i=0;i<data.length;i++){ %>
+                <tr>
+                    <td>
+                      <%= data[i].proId%>
+                    </td>
+                    <td>
+                        <%= data[i].proUrl%>
+                    </td>
+                    <td>
+                        <%= data[i].brand%>
+                    </td>
+                    <td>
+                        <%= data[i].category%>
+                    </td>
+                    <td>
+                        <%= data[i].subCategory%>
+                    </td>
+                </tr>
+            <% } %>
+        </table>
+    </body>
+</html>
