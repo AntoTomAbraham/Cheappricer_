@@ -720,6 +720,13 @@
             "rel_digi": -1,
             "croma": 14999.0,
             "dell_india_pc": -1
+        },
+        "26-11-2021": {
+            "amazon_india": 14999.0,
+            "flipkart": 15188.0,
+            "rel_digi": -1,
+            "croma": 0,
+            "dell_india_pc": -1
         }
     },
     "2": {
@@ -1433,6 +1440,13 @@
         "25-11-2021": {
             "amazon_india": 16999.0,
             "flipkart": 18990.0,
+            "rel_digi": -1,
+            "croma": -1,
+            "dell_india_pc": -1
+        },
+        "26-11-2021": {
+            "amazon_india": 16999.0,
+            "flipkart": 18290.0,
             "rel_digi": -1,
             "croma": -1,
             "dell_india_pc": -1
@@ -2152,6 +2166,13 @@
             "rel_digi": 0,
             "croma": -1,
             "dell_india_pc": -1
+        },
+        "26-11-2021": {
+            "amazon_india": 0,
+            "flipkart": 18567.0,
+            "rel_digi": 0,
+            "croma": -1,
+            "dell_india_pc": -1
         }
     },
     "4": {
@@ -2805,6 +2826,13 @@
             "rel_digi": -1,
             "croma": -1,
             "dell_india_pc": -1
+        },
+        "26-11-2021": {
+            "amazon_india": 17990.0,
+            "flipkart": 15999.0,
+            "rel_digi": -1,
+            "croma": -1,
+            "dell_india_pc": -1
         }
     },
     "5": {
@@ -3437,6 +3465,13 @@
             "rel_digi": 24999.0,
             "croma": 24999.0,
             "dell_india_pc": -1
+        },
+        "26-11-2021": {
+            "amazon_india": 24999.0,
+            "flipkart": -1,
+            "rel_digi": 24999.0,
+            "croma": 0,
+            "dell_india_pc": -1
         }
     },
     "6": {
@@ -4064,6 +4099,13 @@
             "dell_india_pc": -1
         },
         "25-11-2021": {
+            "amazon_india": 24999.0,
+            "flipkart": -1,
+            "rel_digi": 22999.0,
+            "croma": -1,
+            "dell_india_pc": -1
+        },
+        "26-11-2021": {
             "amazon_india": 24999.0,
             "flipkart": -1,
             "rel_digi": 22999.0,
@@ -4701,6 +4743,13 @@
             "rel_digi": 27999.0,
             "croma": 27999.0,
             "dell_india_pc": -1
+        },
+        "26-11-2021": {
+            "amazon_india": 24999.0,
+            "flipkart": -1,
+            "rel_digi": 27999.0,
+            "croma": 0,
+            "dell_india_pc": -1
         }
     },
     "8": {
@@ -5332,6 +5381,13 @@
             "flipkart": -1,
             "rel_digi": 39999.0,
             "croma": 39999.0,
+            "dell_india_pc": -1
+        },
+        "26-11-2021": {
+            "amazon_india": 39999.0,
+            "flipkart": -1,
+            "rel_digi": 39999.0,
+            "croma": 0,
             "dell_india_pc": -1
         }
     },
@@ -5965,6 +6021,13 @@
             "rel_digi": 7990.0,
             "croma": 7990.0,
             "dell_india_pc": -1
+        },
+        "26-11-2021": {
+            "amazon_india": 7990.0,
+            "flipkart": 7990.0,
+            "rel_digi": 7990.0,
+            "croma": 0,
+            "dell_india_pc": -1
         }
     },
     "10": {
@@ -6596,6 +6659,13 @@
             "flipkart": 5999.0,
             "rel_digi": 5499.0,
             "croma": 5999.0,
+            "dell_india_pc": -1
+        },
+        "26-11-2021": {
+            "amazon_india": -1,
+            "flipkart": 5999.0,
+            "rel_digi": 5499.0,
+            "croma": 0,
             "dell_india_pc": -1
         }
     },
@@ -7229,6 +7299,13 @@
             "rel_digi": 57999.0,
             "croma": -1,
             "dell_india_pc": -1
+        },
+        "26-11-2021": {
+            "amazon_india": 79800.0,
+            "flipkart": 97999.0,
+            "rel_digi": 57999.0,
+            "croma": -1,
+            "dell_india_pc": -1
         }
     },
     "12": {
@@ -7853,6 +7930,13 @@
             "flipkart": 15999.0,
             "rel_digi": -1,
             "croma": 13999.0,
+            "dell_india_pc": -1
+        },
+        "26-11-2021": {
+            "amazon_india": 0,
+            "flipkart": 15999.0,
+            "rel_digi": -1,
+            "croma": 0,
             "dell_india_pc": -1
         }
     },
@@ -8479,6 +8563,13 @@
             "rel_digi": -1,
             "croma": -1,
             "dell_india_pc": -1
+        },
+        "26-11-2021": {
+            "amazon_india": 9299.0,
+            "flipkart": 10790.0,
+            "rel_digi": -1,
+            "croma": -1,
+            "dell_india_pc": -1
         }
     },
     "14": {
@@ -8991,6 +9082,13 @@
             "flipkart": 12885.0,
             "rel_digi": -1,
             "croma": 11999.0,
+            "dell_india_pc": -1
+        },
+        "26-11-2021": {
+            "amazon_india": 11499.0,
+            "flipkart": 13490.0,
+            "rel_digi": -1,
+            "croma": 0,
             "dell_india_pc": -1
         }
     },
@@ -9505,6 +9603,13 @@
             "rel_digi": -1,
             "croma": -1,
             "dell_india_pc": -1
+        },
+        "26-11-2021": {
+            "amazon_india": 28900.0,
+            "flipkart": 32900.0,
+            "rel_digi": -1,
+            "croma": -1,
+            "dell_india_pc": -1
         }
     },
     "16": {
@@ -10014,6 +10119,13 @@
         },
         "25-11-2021": {
             "amazon_india": 13959.0,
+            "flipkart": 11999.0,
+            "rel_digi": 14499.0,
+            "croma": -1,
+            "dell_india_pc": -1
+        },
+        "26-11-2021": {
+            "amazon_india": 13950.0,
             "flipkart": 11999.0,
             "rel_digi": 14499.0,
             "croma": -1,
